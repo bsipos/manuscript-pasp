@@ -1,0 +1,8 @@
+archiv
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
+.Rhistory
+pix
