@@ -68,6 +68,18 @@
 \newcommand{\mul}{\ensuremath{\mathrm{\mu l}} }
 \newcommand{\C}{\,$^{\circ}\mathrm{C}$ }
 \usepackage{tablefootnote}
+\usepackage[symbol*]{footmisc}
+
+% Thanks, stackexchange!
+\DefineFNsymbolsTM{myfnsymbols}{% def. from footmisc.sty "bringhurst" symbols
+  \textdagger    \dagger
+  \textasteriskcentered *
+  \textdaggerdbl \ddagger
+  \textsection   \mathsection
+  \textbardbl    \|%
+  \textparagraph \mathparagraph
+}%
+\setfnsymbol{myfnsymbols}
 
 
 %% END MACROS SECTION
@@ -84,7 +96,7 @@
 Botond Sipos$^{1, \ast}$, 
 Adrian M. St\"utz$^{2}$, 
 Greg Slodkowicz$^{1}$,
-Tim Massingham$^{1}$\tablefootnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX44GA, United Kingdom.},
+Tim Massingham$^{1}$\footnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX44GA, United Kingdom.},
 % TODO: Fix footnotemark.
 
 Jan Korbel$^{2}$, 
