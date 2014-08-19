@@ -1,6 +1,7 @@
 archiv
 odt
 *.aux
+*.out
 *.bbl
 *.blg
 *.log
