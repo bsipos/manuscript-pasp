@@ -113,9 +113,9 @@ The poly(A) tail, co-transcriptionally added to most eukaryotic mRNAs, plays an 
 
 To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PAT-seq (poly(A) tail length determination by sequencing), a whole-transcriptome approach to measuring tail lengths  -- including a computational pipeline implementing all necessary analyses. PAT-seq uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
 
-Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, nd the expected upward shift in the tail length in the mutant samples was detecte. This suggests that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
+Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, and the expected upward shift in the tail length in the mutant samples was detected. This suggests that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
 
-The correlation of per-transcript mean tail lengths between biological and technical replicates was low (higher between mutant samples). ot reached high values after filtering for transcripts with greater coverage. We also compare our results with those of other methods. We identify a number of improvements that could be used in future PAT-seq experiments and, based on our results, believe that direct sequencing of poly(A) tails can become the method of choice for studying polyadenylation using the Illumina platform.
+The correlation of per-transcript mean tail lengths between biological and technical replicates was low (higher between mutant samples). Both reached high values after filtering for transcripts with greater coverage. We also compare our results with those of other methods. We identify a number of improvements that could be used in future PAT-seq experiments and, based on our results, believe that direct sequencing of poly(A) tails can become the method of choice for studying polyadenylation using the Illumina platform.
 
 \section*{Introduction}
 
@@ -127,9 +127,9 @@ The poly(A) tails are bound by poly(A) binding proteins (PABs) during their synt
 
 Through its role in the cellular processes above, changes in the length of the PAT are involved in a range of important biological processes such as inflammation \cite{weill12}, embryogenesis \cite{weill12,subtelny14}, axonal transport \cite{weill12}, circadian rhythm \cite{gotic12} and DNA damage response \cite{traven05}. The initial length ($\sim$250 bases in humans, $\sim$70--80 in yeast according to \cite{eckmann11}) to which the poly(A) polymerase extends the tail is regulated by the affinity and homopolymer structure of the PABs. After synthesis, the tail length is modified by various adenylases and deadenylases, with the enzymes and mechanisms involved showing considerable variability between different organisms \cite{brown98,eckmann11}. In the case of \textit{S.~cerevisiae}, the tail is tailored to a message-specific length by the nuclear PAN deadenylase complex, governed by regulatory elements located in the 3’-UTR \cite{brown98,beilharz07}. Throughout the lifetime of the mRNA in the cytoplasm the tail is gradually shortened by the Ccr4-Not complex. Due to this and similar processes, the tail length in total mRNA usually differs from the default length (median tail length 75--100 in human, 33.1 in yeast according to \cite{subtelny14}).
 
-The genome-wide study of alternative polyadenylation has been stimulated by the development of assays based on high-throughput sequencing (reviewed in \cite{elkon13}). Regular RNA-seq is inefficient for the study of PASs and PATs, as only a small fraction of the reads overlap with these regions for reasons which are not fully understoo \cite{fu11,wilkening13}. Consequently, assays have been developed that compensate for this through enrichment techniques. An additional complication is that on the Illumina sequencing platform reads overlapping PATs have low quality values \cite{wilkening13}, suggestive of unreliable basecalls. Likely causes of this issue are mispriming of the sequencing oligo and increased phasing noise due to polymerase slippage \cite{wilkening13}. Both issues are related to the low sequence complexity of the tail; hence some protocols, such as SAPAS \cite{fu11} introduce random mutations in the sequencing library in order to mitigate this.
+The genome-wide study of alternative polyadenylation has been stimulated by the development of assays based on high-throughput sequencing (reviewed in \cite{elkon13}). Regular RNA-seq is inefficient for the study of PASs and PATs, as only a small fraction of the reads overlap with these regions  for reasons which are not fully understood \cite{fu11,wilkening13}. Consequently, assays have been developed that compensate for this through enrichment techniques. An additional complication is that on the Illumina sequencing platform reads overlapping PATs have low quality values \cite{wilkening13}, suggestive of unreliable basecalls. Likely causes of this issue are mispriming of the sequencing oligo and increased phasing noise due to polymerase slippage \cite{wilkening13}. Both issues are related to the low sequence complexity of the tail; hence some protocols, such as SAPAS \cite{fu11} introduce random mutations in the sequencing library in order to mitigate this.
 
-Since the above issues have a large impact on the measurement of PAT lengths through direct sequencing, the development of high throughput AT lengt assays has been slower than the development of protocols targeting PASs. Until the recent publication of the PAL-seq method by \cite{subtelny14}, high-throughput poly(A) assays were based on fractionation of mRNAs according to the tail length using affinity chromatography followed by microarray analysis \cite{beilharz07,meijer07}. Hence, most of the literature regarding PAT length relates to low-throughput experiments using various techniques targeting specific transcripts \cite{salles95} and based on reverse transcription and PCR using transcript-specific and tail-specific primers. The tail-specific primers can be simple oligo dTs (as in the RACE-PAT assay \cite{salles95}) or primers targeting tags at the end of the tail engineered through ligation (LM-PAT \cite{salles95}), extension by the Klenow fragment (E-PAT, \cite{janicke12}), or G-tailing \cite{kusov01}. These methods are well-established; however, they are impractical for large-scale studies.
+Since the above issues have a large impact on the measurement of PAT lengths through direct sequencing, the development of high throughput PAT length assays has been slower than the development of protocols targeting PASs. Until the recent publication of the PAL-seq method by \cite{subtelny14}, high-throughput poly(A) assays were based on fractionation of mRNAs according to the tail length using affinity chromatography followed by microarray analysis \cite{beilharz07,meijer07}. Hence, most of the literature regarding PAT length relates to low-throughput experiments using various techniques targeting specific transcripts \cite{salles95} and based on reverse transcription and PCR using transcript-specific and tail-specific primers. The tail-specific primers can be simple oligo dTs (as in the RACE-PAT assay \cite{salles95}) or primers targeting tags at the end of the tail engineered through ligation (LM-PAT \cite{salles95}), extension by the Klenow fragment (E-PAT, \cite{janicke12}), or G-tailing \cite{kusov01}. These methods are well-established; however, they are impractical for large-scale studies.
 
 The high-throughput PAL-seq assay \cite{subtelny14} is a customized experiment on the Illumina sequencing platform involving a ``T-filling'' step similar to \cite{wilkening13} using a mixture of dTTP and biotinylated dUTP and measurement of fluorescence of labeled streptavidin bound to the clusters. After normalization based on signal from spike-ins with poly(A) tracts of known length, the measured fluorescence is converted into estimated tail lengths. The PAL-seq assay has good reproducibility (with a correlation of 0.93 between biological replicates), but considering the complexity of the protocol there is still advantage to be gained from alternative high-throughput PAT length assays, preferably based on direct sequencing of the tail.
 
@@ -176,7 +176,7 @@ All 16 pooled barcoded libraries were sequenced on one HiSeq2000 lane in 2 $\tim
 
 The data analysis pipeline with documentation, logs and selected raw results (see also \textbf{Text S1}) is available at \href{http://github.com/sbotond/paper-pat-seq}{http://github.com/sbotond/paper-pat-seq}. Individual primary data analysis steps implemented in specialised tools written in Python (under directory \texttt{patsy/})  and downstream data analysis steps implemented in R scripts (under \texttt{scripts/}) can be invoked through documented \texttt{make} targets.
 
-The first primary data analysis step is the classification of read pairs into ``G-tail'' pairs, based on the presence of a sequence motif characteristic to the poly(A) tail/oligo(G)-tag junction in the first 14 aligned bases of one of the reads, or ``NVTR'' read pairs otherwise. For G-tail reads we require a minimum G-tag length of 3 and we allow for a maximum of 6 Ns in the first 14 bases. The G-tail pairs represent those that will, ideally, contain the complete PAT in one read and mappable sequence in the paired read that will unambiguously identify the transcript. We map the G-tail read pairs to the SGD \textit{S.~cerevisiae} reference transcriptome \cite{engel13} using Bowtie2 \cite{langmead12} with parameters \texttt{--ignore-quals --sensitive -I 0 -X 500 –no-contain},aimed to perform a stringent alignment of the read anchoring the fragment to the respective transcript 
+The first primary data analysis step is the classification of read pairs into ``G-tail'' pairs, based on the presence of a sequence motif characteristic to the poly(A) tail/oligo(G)-tag junction in the first 14 aligned bases of one of the reads, or ``NVTR'' read pairs otherwise. For G-tail reads we require a minimum G-tag length of 3 and we allow for a maximum of 6 Ns in the first 14 bases. The G-tail pairs represent those that will, ideally, contain the complete PAT in one read and mappable sequence in the paired read that will unambiguously identify the transcript. We map the G-tail read pairs to the SGD \textit{S.~cerevisiae} reference transcriptome \cite{engel13} using Bowtie2 \cite{langmead12} with parameters \texttt{--ignore-quals --sensitive -I 0 -X 500 –no-contain}, aimed to perform a stringent alignment of the read anchoring the fragment to the respective transcript. 
 
 All non-G-tail read pairs are classified as NVTR reads (representing those targeting the transcript-end/poly(A) junction and ``noise'' reads (most likely originating from fragments which are products of off-target priming). These are used to assess the insert size distributions of the technical replicates and other quality control measures. They are mapped to the SGD transcriptome using Bowtie2 with parameters \texttt{--ignore-quals --sensitive-local -I 0 -X 500 --no-mixed --no-discordant –no-contain}, aiming for a less stringent alignment of both reads corresponding to the fragment. The classification and mapping analysis steps are implemented in the \texttt{patsy-align} tool. 
 
@@ -208,10 +208,11 @@ We consistently observe an upward shift in the tail length in the \textit{$\Delt
 
 \subsection*{Coverage-dependent consistency of per-transcript tail run distributions}
 
-espite the consistent global tail run distributions, the correlation of per-transcript mean tail run lengths between biological replicates is not high, both in the case of wild type and mutant samples (WT1 vs.\ WT2: $r$=0.25; MUT1 vs.\ MUT2: $r$=0.46).
+Despite the consistent global tail run distributions, the correlation of per-transcript mean tail run lengths between biological replicates is not high, both in the case of wild type and mutant samples (WT1 vs.\ WT2: $r$=0.25; MUT1 vs.\ MUT2: $r$=0.46).
 However, the correlation increases after applying coverage filtering with increasing thresholds. After filtering for minimum G-tail coverage of 400 fragments, we are left with 1211 transcripts (out of 3951 detected overall) in wild type and 673 (out of 4646 detected) in the mutant samples, with per-transcript mean tail run correlations of 0.54 and 0.95, respectively.
 At a coverage threshold of 1000 the correlation reaches high values both between wild type and mutant samples (WT1 vs.\ WT2: r=0.73; MUT1 vs.\ MUT2: r=0.98; \textbf{Figure 4A}), but we lose a significant proportion of the detected transcripts (465 transcripts retained in the WT samples; 315 transcripts retained in the mutant). 
 This behavior is consistent with the observations drawn above from the analysis of spike-in reads, and also explains the consistency of the global tail run distributions which are necessarily dominated by more abundantly expressed transcripts.
+
 At a coverage threshold of 1000 the correlation reaches high values both between WT and mutant samples (WT1 vs.\ WT2: r=0.73; MUT1 vs.\ MUT2: r=0.98), but we lose a significant proportion of the detected transcripts (465 transcripts retained in the WT samples; 315 transcripts retained in the mutant).
 
 The increase of correlation between mutant and WT biological replicates showed some interesting differences: correlation between the mutant replicates is already high at low coverage thresholds and initially increases with a higher rate; this is, however, coupled with a higher number of discarded transcripts. The higher initial and post-filtering correlation between the mutant replicates likely has both technical and biological causes. First, the tails in mutants are likely to stay closer to their initial length and so are expected to be more homogeneous \cite{traven05,beilharz07}. Second, tails in the mutants are closer to the read length; hence the drift towards longer lengths is expected to have a smaller confounding effect.
@@ -262,20 +263,8 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \begin{itemize}
 
 \item[]{
-s
-
-
-
 \textbf{Figure 1. Illustration of PAT-seq protocol}
 }
-
-
-
-
-
-
-
-
 \item[]{
 \includegraphics[scale=0.8]{Figure2.png}
 
@@ -309,7 +298,7 @@ s
 \includegraphics[scale=0.8]{Figure5.png}
 
 \textbf{Figure 5. Tail run distributions for selected transcripts with high G-tail fragment coverage in WT1 and MUT1 (left) and 
-WT2 and MUT2 (right) samples.} \textbf{A.}~YBR072W transcript of the small heat shock protein HS26 (coverage XXX). \textbf{B.}~YFL014W transcript of HSP12 (coverage XXX). \textbf{C.}~YER177W transcript of BMH1(coverage XXX)
+WT2 and MUT2 (right) samples.} \textbf{A.}~YBR072W transcript of the small heat shock protein HS26 (coverage XXX). \textbf{B.}~YFL014W transcript of HSP12 (coverage XXX). \textbf{C.}~YER177W transcript of BMH1 (coverage XXX).
 }
 
 \end{itemize}
@@ -356,4 +345,6 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~YBR072W transcript of the small heat 
 \end{itemize}
 
 \end{document}
+
+
 
