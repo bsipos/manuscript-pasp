@@ -65,8 +65,11 @@
     pdfborder={0 0 0},
 }
 
-\newcommand{\mul}{\ensuremath{\mathrm{\mu l}} }
-\newcommand{\C}{\,$^{\circ}\mathrm{C}$ }
+\newcommand{\diff}[1]{\textcolor{blue}{#1}}  % highlights using blue, to indicate things that have changed
+\newcommand{\note}[1]{\textcolor{red}{[#1]}}  % notes are included in brackets and in red
+
+\newcommand{\mul}{\ensuremath{\mathrm{\mu l}}} % Botond, look, all I had to do to fix the trailing spaces was to remove the stray space characters that preceded the final }
+\newcommand{\C}{\,$^{\circ}\mathrm{C}$}
 \usepackage{tablefootnote}
 \usepackage[symbol*]{footmisc}
 
@@ -93,29 +96,35 @@
 }
 % Insert Author names, affiliations and corresponding author email.
 \\
+\vspace{5mm}
 Botond Sipos$^{1, \ast}$, 
 Adrian M. St\"utz$^{2}$, 
 Greg Slodkowicz$^{1}$,
-Tim Massingham$^{1}$\footnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX44GA, United Kingdom.},
+Tim Massingham$^{1}$\footnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX4 4GA, United Kingdom.},
 Jan Korbel$^{2}$, 
 Nick Goldman$^{1}$
 \\
-\bf{1} European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge, United Kingdom
+\vspace{5mm}
+$^1$European Molecular Biology Laboratory, European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridge, United Kingdom \note{some formatting changes in the addresses, to conform to EMBL rules}
 \\
-\bf{2} European Molecular Biology Laboratory (EMBL), Genome Biology Research Unit, Heidelberg, Germany 
+$^2$European Molecular Biology Laboratory, Genome Biology Unit, Heidelberg, Germany 
 \\
-$\ast$ E-mail: sbotond@ebi.ac.uk
+$^\ast$E-mail: sbotond@ebi.ac.uk
+\\
+\vspace{5mm}
+\diff{\textbf{Keywords:} add some; include ``high-throughput''} \note{Notice the use of my own `diff' and `note' commands.  The former is used to highlight text changes that I want you to see; if you approve, then just delete the command and leave the text in black.  If you disapprove, propose an alternative and leave it in blue.  `note' is used to add some comment, like this; update with your response, or delete if the issue is resolved (just as we have done in the past with Google docs comments).}
+
 \end{flushleft}
 
 \section*{Abstract}
 
 The poly(A) tail, co-transcriptionally added to most eukaryotic mRNAs, plays an important role in post-transcriptional regulation through modulating mRNA stability and translational efficiency. The length of the poly(A) tail is dynamic, decreasing or increasing in response to various stimuli through the action of enzymatic complexes, and changes in tail length are exploited in regulatory pathways implicated in various biological processes.
 
-To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PAT-seq (poly(A) tail length determination by sequencing), a whole-transcriptome approach to measuring tail lengths  -- including a computational pipeline implementing all necessary analyses. PAT-seq uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
+To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PAT-seq (`poly(A) tail length determination by sequencing'), a whole-transcriptome approach to measure tail lengths  --- including a computational pipeline implementing all necessary analyses. PAT-seq uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
 
-Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, and the expected upward shift in the tail length in the mutant samples was detected. This suggests that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
+Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, and the expected upward shift in tail lengths in the mutant samples was detected. This suggests that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
 
-The correlation of per-transcript mean tail lengths between biological and technical replicates was low (higher between mutant samples). Both reached high values after filtering for transcripts with greater coverage. We also compare our results with those of other methods. We identify a number of improvements that could be used in future PAT-seq experiments and, based on our results, believe that direct sequencing of poly(A) tails can become the method of choice for studying polyadenylation using the Illumina platform.
+The correlation of per-transcript mean tail lengths between biological and technical replicates was low (higher between mutant samples). Both, however, reached high values after filtering for transcripts with greater coverage. We also compare our results with those of other methods. We identify a number of improvements that could be used in future PAT-seq experiments and, based on our results, believe that direct sequencing of poly(A) tails can become the method of choice for studying polyadenylation using the Illumina platform.
 
 \section*{Introduction}
 
