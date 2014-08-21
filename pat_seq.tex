@@ -195,7 +195,9 @@ are used to assess the insert size distributions of the technical replicates and
 
 The resulting G-tail and NVTR alignments are parsed into G-tail and NVTR fragments, respectively, using the \texttt{patsy-parse} tool. For each transcript, we tabulate the distribution of the number of A bases until the first non-A base after the G-tag in the G-tail reads overlapping the PAT (the ``tail run'' distribution). Insert size distributions are assessed based on the mapped NVTR fragments.
 
-Using the \texttt{patsy-spike} tool we extract the reads mapped to the spike-in standards, identify the reads overlapping the poly(A) tracts with known lengths and plot the distributions of number of A bases until the first 1--5 non-A bases.
+Using the \texttt{patsy-spike} tool we extract the reads mapped to the spike-in standards, identify the reads overlapping the poly(A) tracts with known lengths and plot the distributions of number of A bases until the first 1--5 non-A bases.  
+\diff{Comparison of the results obtained for this range of thresholds, necessary because of the low quality scores of many reads, led us to choose a criterion of 1 non-A base for defining the PAT length.} 
+\note{Is this OK?  It is important to explain *why* we tried a variety of options, otherwise readers will just think we are indecisive and won't know what we did for the final analysis.}
 
 The last step of the primary data analysis is to plot the per-transcript and global tail run distributions from wild type (WT1 and WT2) and mutant (MUT1 and MUT2) samples and to test the significance of differences using Mann-Whitney U-test (with a minimum sample size of 30).
 
