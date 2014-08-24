@@ -138,8 +138,6 @@ Through its role in the cellular processes above, changes in the length of the P
 
 The genome-wide study of alternative polyadenylation has been stimulated by the development of assays based on high-throughput sequencing (reviewed in \cite{elkon13}). Regular RNA-seq is inefficient for the study of PASs and PATs, as only a small fraction of the reads overlap with these regions for reasons that are not fully understood \cite{fu11,wilkening13}. Consequently, assays have been developed that compensate for this through enrichment techniques. An additional complication is that on the Illumina sequencing platform reads overlapping PATs have low quality values \cite{wilkening13}, suggestive of unreliable base calls. Likely causes of this issue are mispriming of the sequencing oligo and increased phasing noise due to polymerase slippage \cite{wilkening13}. Both issues are related to the low sequence complexity of the tail; hence some protocols, such as SAPAS \cite{fu11}, introduce random mutations in the sequencing library in order to mitigate this.
 
-\note{some redundant text removed here}
-% Since the above issues have a large impact on the measurement of PAT lengths through direct sequencing, 
 The development of high-throughput PAT length assays has been slower than the development of protocols targeting PASs. Until the recent publication of the PAL-seq method by \cite{subtelny14}, high-throughput poly(A) assays were based on fractionation of mRNAs according to the tail length using affinity chromatography followed by microarray analysis \cite{beilharz07,meijer07}. Hence, most of the literature regarding PAT length relates to low-throughput experiments using various techniques targeting specific transcripts \cite{salles95} and based on reverse transcription and PCR using transcript-specific and tail-specific primers. The tail-specific primers can be simple oligo dTs (as in the RACE-PAT assay \cite{salles95}) or primers targeting tags at the end of the tail engineered through ligation (LM-PAT \cite{salles95}), extension by the Klenow fragment (E-PAT \cite{janicke12}), or G-tailing \cite{kusov01}. These methods are well-established; however, they are impractical for large-scale studies.
 
 The high-throughput PAL-seq assay \cite{subtelny14} is a customized experiment on the Illumina sequencing platform involving a ``T-filling'' step similar to \cite{wilkening13} using a mixture of dTTP and biotinylated dUTP and measurement of fluorescence of labeled streptavidin bound to the clusters. After normalization based on signal from spike-ins with poly(A) tracts of known length, the measured fluorescence is converted into estimated tail lengths. The PAL-seq assay has good reproducibility (with a correlation of 0.93 between biological replicates), but considering the complexity of the protocol there is still advantage to be gained from alternative high-throughput PAT length assays, preferably based on direct sequencing of the tail.
@@ -161,7 +159,7 @@ Two rounds of poly(A) selection were performed using the TruSeq RNA Sample Prepa
 \subsection*{Spike-in control}
 
 20{\mul} of spike-in \textit{in vitro} transcripts with a known A$_{42}$ stretch \cite{pelechano13} were added. 
-\note{If it's A$_{42}$, how come everywhere else we now state that the expected A length is 43?}
+\note{If it's A$_{42}$, how come everywhere else we now state that the expected A length is 43?}\note{Well, Adrian pointed it out that due to the way we are counting the As we will count 42. I never really gave a throught to this just trusted him. This is also one of the minor issues we keep coming back to. But I will look at the code and try to convince myself that he is right.}
 A cleanup step was performed using the RNeasy MinElute Cleanup Kit (Qiagen) according to protocol, eluting with 14{\mul} water.
 
 \subsection*{G-tailing and fragmentation}
@@ -192,7 +190,6 @@ The data analysis pipeline with documentation, logs and selected raw results (se
 The first primary data analysis step is the classification of read pairs into ``G-tail'' pairs, based on the presence of a sequence motif characteristic to the poly(A) tail/oligo(G)-tag junction in the first 14 aligned bases of one of the reads, or ``NVTR'' read pairs otherwise. For G-tail reads we require a minimum G-tag length of 3 and we allow for a maximum of 6 Ns in the first 14 bases. The G-tail pairs represent those that will, ideally, contain the complete PAT in one read and mappable sequence in the paired read that will unambiguously identify the transcript. We map the G-tail read pairs to the SGD \textit{S.~cerevisiae} reference transcriptome \cite{engel13} using Bowtie2 \cite{langmead12} with parameters \texttt{--ignore-quals --sensitive -I 0 -X 500 –no-contain}, chosen to perform a stringent alignment of the read anchoring the fragment to the respective transcript. 
 
 All non-G-tail read pairs are classified as NVTR reads, representing those targeting the transcript-end/poly(A) junction as well as ``noise'' reads most likely originating from fragments that are products of off-target priming. The NVTR reads 
-\note{I have tried to simplify this para.\ up to here.  Please check that I have not damaged the meaning.} 
 are used to assess the insert size distributions of the technical replicates and other quality control measures. They are mapped to the SGD transcriptome using Bowtie2 with parameters \texttt{--ignore-quals --sensitive-local -I 0 -X 500 --no-mixed --no-discordant –no-contain}, aiming for a less stringent alignment of both reads corresponding to the fragment. The classification and mapping analysis steps are implemented in the \texttt{patsy-align} tool. 
 
 The resulting G-tail and NVTR alignments are parsed into G-tail and NVTR fragments, respectively, using the \texttt{patsy-parse} tool. For each transcript, we tabulate the distribution of the number of A bases until the first non-A base after the G-tag in the G-tail reads overlapping the PAT (the ``tail run'' distribution). Insert size distributions are assessed based on the mapped NVTR fragments.
@@ -214,12 +211,8 @@ The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fra
 
 \subsection*{Quantification of tail run ``slippage'' using spike-ins}
 
-The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the \textit{error\_thr.pdf} file 
-\note{$\leftarrow$ It's not clear what this refers to.  Either make this filename visible in the Text S1 document, or else add a phrase here that indicates exactly which link in the document is meant}
-linked from Text S1). 
-However, the mean tail run length average 
-\note{``mean \ldots average''? Is it really a mean of averages?  Even if it is, maybe it is OK to omit one of those words?}
-from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PAT-seq data.
+The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from Text S1). \note{Just deleted the file name, it was ugly there indeed. Do you think it is fine like this? Text S1 has a heading for this.}
+However, the mean tail run length \note{Removed 'average'} from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PAT-seq data.
 
 \subsection*{Global shift in polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants}
 
@@ -234,8 +227,6 @@ However, the correlation increases after applying coverage filtering with increa
 At a coverage threshold of 1000 the correlation reaches high values both between wild type and mutant samples (WT1 vs.\ WT2: r=0.73; MUT1 vs.\ MUT2: r=0.98; \textbf{Figure 4A}), but we lose a greater proportion of the detected transcripts (465 transcripts retained in the WT samples; 315 transcripts retained in the mutant). 
 This behavior is consistent with the observations drawn above from the analysis of spike-in reads, and also explains the consistency of the global tail run distributions which are necessarily dominated by more abundantly expressed transcripts.
 
-\note{Deleted further repetition of the coverage threshold 1000 results}
-%At a coverage threshold of 1000 the correlation reaches high values both between WT and mutant samples (WT1 vs.\ WT2: r=0.73; MUT1 vs.\ MUT2: r=0.98), but we lose a significant proportion of the detected transcripts (465 transcripts retained in the WT samples; 315 transcripts retained in the mutant).
 
 The increase of correlation between mutant and WT biological replicates showed some interesting differences: correlation between the mutant replicates is already high at low coverage thresholds and initially increases with a higher rate; this is, however, coupled with a higher number of discarded transcripts. The higher initial and post-filtering correlation between the mutant replicates likely has both technical and biological causes. First, the tails in mutants are likely to stay closer to their initial length and so are expected to be more homogeneous \cite{traven05,beilharz07}. Second, tails in the mutants are closer to the read length; hence the drift towards longer lengths is expected to have a smaller confounding effect.
 
@@ -249,11 +240,9 @@ The consistency of the tail run distributions for transcripts such as those show
 
 \subsection*{Correlation between PAT-seq and previous high-throughput assays}
 
-We have examined the correlation of WT mean per-transcript tail run lengths for the 465 transcripts with at least 1000 G-tail fragment coverage with results obtained from \textit{S.~cerevisiae} by the PASTA \cite{beilharz07} and PAL-seq \cite{subtelny14} protocols. There was no correlation between the PAT-seq and PAL-seq results (WT1 vs.\ PAL-seq: $r$=0.07; WT2 vs.\ PAL-seq: $r$=0.03; \textbf{Figure~S2}), despite the high correlation ($r$=0.73) of PAT-seq between biological replicates for the high coverage subset and the high correlation between PAL-seq biological replicates. The correlation between PAL-seq and PASTA results was also weak (r=0.14 for 3631 transcripts; \textbf{Figure~S3}), while correlation between PAT-seq and PASTA was negative (\textbf{Figure~S4}). \note{OK, I'm now happy with this ordering, no need to switch.}
+We have examined the correlation of WT mean per-transcript tail run lengths for the 465 transcripts with at least 1000 G-tail fragment coverage with results obtained from \textit{S.~cerevisiae} by the PASTA \cite{beilharz07} and PAL-seq \cite{subtelny14} protocols. There was no correlation between the PAT-seq and PAL-seq results (WT1 vs.\ PAL-seq: $r$=0.07; WT2 vs.\ PAL-seq: $r$=0.03; \textbf{Figure~S2}), despite the high correlation ($r$=0.73) of PAT-seq between biological replicates for the high coverage subset and the high correlation between PAL-seq biological replicates. The correlation between PAL-seq and PASTA results was also weak (r=0.14 for 3631 transcripts; \textbf{Figure~S3}), while correlation between PAT-seq and PASTA was negative (\textbf{Figure~S4}).
 
 The observed poor correlation between the different assays suggests that the polyadenylation status of the transcriptome might be especially sensitive to growth conditions, or alternatively can be explained by strong and reproducible biases affecting one or more of the assays. 
-\note{Text about ranges deleted, as agreed at The Green Man.}
-%Also, the PAT-seq high coverage transcript subset mean tail lengths showed a wider range than the corresponding lengths estimated by PAL-seq (\textbf{Figure~S2}).  This suggests that either the PAT-seq method has a greater dynamic range, or that our PAT-seq data were inherently noisier. 
 Additional experiments will be necessary to further compare these alternative methods.
 
 \subsection*{The potential of PAT-seq and future directions in studying polyadenylation}
@@ -341,7 +330,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~\diff{Small heat shock protein HSP26/
 \begin{itemize}
 
 \item[]{
-\note{Not sure what is the best way to include the separate Text\_S1.pdf document in here.  We could put some sort of `see following pages' comment here, and then use a program to insert the pdf pages next?} \\
+\note{Not sure what is the best way to include the separate Text\_S1.pdf document in here.  We could put some sort of `see following pages' comment here, and then use a program to insert the pdf pages next?} \note{I will place this last in the ArXiv version and paste the supporting text after. For the Plos version I think it goes to the submission form.} \\
 \textbf{Text S1. Index of selected raw results.}
 }
 \vspace{1cm}
