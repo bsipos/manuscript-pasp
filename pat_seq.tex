@@ -159,7 +159,7 @@ Two rounds of poly(A) selection were performed using the TruSeq RNA Sample Prepa
 \subsection*{Spike-in control}
 
 20{\mul} of spike-in \textit{in vitro} transcripts with a known A$_{42}$ stretch \cite{pelechano13} were added. 
-\note{If it's A$_{42}$, how come everywhere else we now state that the expected A length is 43?}\note{Well, Adrian pointed it out that due to the way we are counting the As we will count 42. I never really gave a throught to this just trusted him. This is also one of the minor issues we keep coming back to. But I will look at the code and try to convince myself that he is right.}
+\note{NG: If it's A$_{42}$, how come everywhere else we now state that the expected A length is 43? BS: Well, Adrian pointed it out that due to the way we are counting the As we will count 42. I never really gave a throught to this just trusted him. This is also one of the minor issues we keep coming back to. But I will look at the code and try to convince myself that he is right. NG: I thought Adrian's implication was that using A$_{42}$ meant we would somehow count 42+1=43, but I am not sure why, or whether he is right. I think it is important that we resolve this and use the right answer consistently, otherwise we look sloppy and referees are more likely to look for problems elsewhere too.}
 A cleanup step was performed using the RNeasy MinElute Cleanup Kit (Qiagen) according to protocol, eluting with 14{\mul} water.
 
 \subsection*{G-tailing and fragmentation}
@@ -187,10 +187,10 @@ All 16 pooled barcoded libraries were sequenced on one HiSeq2000 lane in 2 $\tim
 
 The data analysis pipeline with documentation, logs and selected raw results (see also \textbf{Text S1}) is available at \href{http://github.com/sbotond/paper-pat-seq}{http://github.com/sbotond/paper-pat-seq}. Individual primary data analysis steps implemented in specialised tools written in Python (under directory \texttt{patsy/})  and downstream data analysis steps implemented in R scripts (under \texttt{scripts/}) can be invoked through documented \texttt{make} targets.
 
-The first primary data analysis step is the classification of read pairs into ``G-tail'' pairs, based on the presence of a sequence motif characteristic to the poly(A) tail/oligo(G)-tag junction in the first 14 aligned bases of one of the reads, or ``NVTR'' read pairs otherwise. For G-tail reads we require a minimum G-tag length of 3 and we allow for a maximum of 6 Ns in the first 14 bases. The G-tail pairs represent those that will, ideally, contain the complete PAT in one read and mappable sequence in the paired read that will unambiguously identify the transcript. We map the G-tail read pairs to the SGD \textit{S.~cerevisiae} reference transcriptome \cite{engel13} using Bowtie2 \cite{langmead12} with parameters \texttt{--ignore-quals --sensitive -I 0 -X 500 –no-contain}, chosen to perform a stringent alignment of the read anchoring the fragment to the respective transcript. 
+The first primary data analysis step is the classification of read pairs into ``G-tail'' pairs, based on the presence of a sequence motif characteristic to the poly(A) tail/oligo(G)-tag junction in the first 14 aligned bases of one of the reads, or ``NVTR'' read pairs otherwise. For G-tail reads we require a minimum G-tag length of 3 and we allow for a maximum of 6 Ns in the first 14 bases. The G-tail pairs represent those that will, ideally, contain the complete PAT in one read and mappable sequence in the paired read that will unambiguously identify the transcript. We map the G-tail read pairs to the SGD \textit{S.~cerevisiae} reference transcriptome \cite{engel13} using Bowtie2 \cite{langmead12} with parameters \texttt{--ignore-quals --sensitive -I~0 -X~500 --no-contain}, chosen to perform a stringent alignment of the read anchoring the fragment to the respective transcript. 
 
 All non-G-tail read pairs are classified as NVTR reads, representing those targeting the transcript-end/poly(A) junction as well as ``noise'' reads most likely originating from fragments that are products of off-target priming. The NVTR reads 
-are used to assess the insert size distributions of the technical replicates and other quality control measures. They are mapped to the SGD transcriptome using Bowtie2 with parameters \texttt{--ignore-quals --sensitive-local -I 0 -X 500 --no-mixed --no-discordant –no-contain}, aiming for a less stringent alignment of both reads corresponding to the fragment. The classification and mapping analysis steps are implemented in the \texttt{patsy-align} tool. 
+are used to assess the insert size distributions of the technical replicates and other quality control measures. They are mapped to the SGD transcriptome using Bowtie2 with parameters \texttt{--ignore-quals --sensitive-local -I~0 -X~500 --no-mixed --no-discordant --no-contain}, aiming for a less stringent alignment of both reads corresponding to the fragment. The classification and mapping analysis steps are implemented in the \texttt{patsy-align} tool. 
 
 The resulting G-tail and NVTR alignments are parsed into G-tail and NVTR fragments, respectively, using the \texttt{patsy-parse} tool. For each transcript, we tabulate the distribution of the number of A bases until the first non-A base after the G-tag in the G-tail reads overlapping the PAT (the ``tail run'' distribution). Insert size distributions are assessed based on the mapped NVTR fragments.
 
@@ -211,8 +211,8 @@ The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fra
 
 \subsection*{Quantification of tail run ``slippage'' using spike-ins}
 
-The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from Text S1). \note{Just deleted the file name, it was ugly there indeed. Do you think it is fine like this? Text S1 has a heading for this.}
-However, the mean tail run length \note{Removed 'average'} from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PAT-seq data.
+The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from Text S1). 
+However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PAT-seq data.
 
 \subsection*{Global shift in polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants}
 
@@ -278,20 +278,20 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \begin{itemize}
 \item[]{
 \begin{center}
-\includegraphics[scale=1.5]{Figure1.png}
+\includegraphics[scale=1.75]{Figure1.png}
 \end{center}
 
 \textbf{Figure 1. Illustration of PAT-seq protocol.}
 }
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
-\includegraphics[scale=1.25]{Figure2.png}
+\includegraphics[scale=1.5]{Figure2.png}
 \end{center}
 
 \textbf{Figure 2.~The distribution of the number of aligned A bases until the first non-A base (``tail runs'') in the reads mapping to the poly(A) tracts of known length of the spike-in standards.} The vertical green line marks the mean run length from all 53558 reads (44.6), while the red line marks the true length of the spike-in poly(A) tracts (43).}
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
@@ -301,7 +301,7 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \textbf{Figure 3. Shift in global polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants.} \textbf{A}.~Distribution of tail run lengths from all transcripts in the wild type (WT1, blue) and the mutant (MUT1, red) samples. The coloured vertical lines indicate the means of the respective distributions.
 \textbf{B}.~The distribution of significant (Mann-Whitney U-test, $p < 0.05$) per-transcript mean tail run length differences (MUT1 - WT1).
 }
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
@@ -309,16 +309,16 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \end{center}
 
 \textbf{Figure 4. Pearson correlation between biological and technical replicates at different G-tail fragment coverage thresholds.} \textbf{A}.~Correlation between biological replicates.  \textbf{B}.~Average correlation between technical replicates from a given sample.}
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
-\includegraphics[scale=0.8]{Figure5.png}
+\includegraphics[scale=0.9]{Figure5.png}
 \end{center}
 
 \textbf{Figure 5. Tail run distributions for selected transcripts with high G-tail fragment coverage in WT1 and MUT1 (left) and 
-WT2 and MUT2 (right) samples.} \textbf{A.}~\diff{Small heat shock protein HSP26/YBR072W (coverage XXX)}. \textbf{B.}~\diff{HSP12/YFL014W (coverage XXX)}. \textbf{C.}~\diff{BMH1/YER177W (coverage XXX)}.
-\diff{Botond to find the coverage values for these three examples:  since they have been selected as good examples where the coverage is high, it is necessary to state what that coverage is.} \note{Well, for the the moment I cannot do this as have no access to the clusters. Also, if I have lost data then this could be potentially cumbersome and require re-running everything :(. So I would ask you to consider letting this slide, one can *kinda* read the coverages from the graphs.}
+WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072W. \textbf{B.}~HSP12/YFL014W. \textbf{C.}~BMH1/YER177W.
+\note{Botond to add the coverage values for these three examples when possible, but no need to delay submission for this --- they could be added later.}
 }
 
 \end{itemize}
@@ -330,10 +330,10 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~\diff{Small heat shock protein HSP26/
 \begin{itemize}
 
 \item[]{
-\note{Not sure what is the best way to include the separate Text\_S1.pdf document in here.  We could put some sort of `see following pages' comment here, and then use a program to insert the pdf pages next?} \note{I will place this last in the ArXiv version and paste the supporting text after. For the Plos version I think it goes to the submission form.} \\
+\note{NG: Not sure what is the best way to include the separate Text\_S1.pdf document in here.  We could put some sort of `see following pages' comment here, and then use a program to insert the pdf pages next?  BS: I will place this last in the ArXiv version and paste the supporting text after. For the Plos version I think it goes to the submission form. NG: I don't understand your response: but all I am looking for is that readers/reviewers can clearly understand how to get the information.  For the PLoS version, I think it is important that reviewers have access to a PDF version that *looks* OK:  I suspect that the appearance that all the supporting info is available is more important than the actual info.} \\
 \textbf{Text S1. Index of selected raw results.}
 }
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
@@ -343,7 +343,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~\diff{Small heat shock protein HSP26/
 \textbf{Figure S1. Shift in global polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants.} \textbf{A.}~Distribution of tail run lengths from all transcripts in the wild type (WT2, in blue) and the (MUT2, in red) mutant samples. The coloured vertical lines mark the means of the respective distributions.
 \textbf{B.}~The distribution of significant (Mann-Whitney U-test, $p < 0.05$) per-transcript mean tail run length differences (MUT2 - WT2).
 }
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
@@ -351,16 +351,16 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~\diff{Small heat shock protein HSP26/
 \end{center}
 
 \textbf{Figure S2. Correlation of per-transcript mean tail lengths estimated by PAT-seq and PAL-seq in wild type yeast.} \textbf{A.}~Scatter plot and Pearson correlation of PAT-seq mean tail lengths at a coverage threshold of 1000 in WT1 with corresponding results from PAL-seq \cite{subtelny14}. \textbf{B.}~Scatter plot and Pearson correlation of PAT-seq mean tail lengths at a coverage threshold of 1000 in WT2 with PAL-seq.}
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
-\includegraphics[scale=1.0]{FigureS3.png}
+\includegraphics[scale=1.25]{FigureS3.png}
 \end{center}
 
 \textbf{Figure S3. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PAL-seq \cite{subtelny14} and weighted lengths obtained by the PASTA method \cite{beilharz07}. }
 }
-\vspace{1cm}
+\newpage
 
 \item[]{
 \begin{center}
