@@ -92,7 +92,7 @@
 % Title must be 150 characters or less
 \begin{flushleft}
 {\Large
-\textbf{PAT-seq --- a whole-transcriptome poly(A) tail length determination assay for the Illumina platform}
+\textbf{PASP --- a whole-transcriptome poly(A) tail length determination assay for the Illumina platform}
 }
 % Insert Author names, affiliations and corresponding author email.
 \\
@@ -112,7 +112,7 @@ $^2$European Molecular Biology Laboratory, Genome Biology Unit, Heidelberg, Germ
 $^\ast$E-mail: sbotond@ebi.ac.uk
 \\
 \vspace{5mm}
-\textbf{Keywords:} transcriptomics; RNA-seq; poly(A) tail; PAT; high-throughput assay; PAT-seq
+\textbf{Keywords:} transcriptomics; RNA-seq; poly(A) tail; PAT; high-throughput assay; PASP
 
 \end{flushleft}
 
@@ -120,11 +120,11 @@ $^\ast$E-mail: sbotond@ebi.ac.uk
 
 The poly(A) tail, co-transcriptionally added to most eukaryotic mRNAs, plays an important role in post-transcriptional regulation through modulating mRNA stability and translational efficiency. The length of the poly(A) tail is dynamic, decreasing or increasing in response to various stimuli through the action of enzymatic complexes, and changes in tail length are exploited in regulatory pathways implicated in various biological processes.
 
-To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PAT-seq (`poly(A) tail length determination by sequencing'), a whole-transcriptome approach to measure tail lengths  --- including a computational pipeline implementing all necessary analyses. PAT-seq uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
+To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PASP (`poly(A) tail sequencing protocol'), a whole-transcriptome approach to measure tail lengths  --- including a computational pipeline implementing all necessary analyses. PASP uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
 
-Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, and the expected upward shift in tail lengths in the mutant samples was detected. This suggests that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
+Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, and the expected upward shift in tail lengths in the mutant samples was detected. This suggests that PASP is suitable for the assessment of global polyadenylation status in yeast.
 
-The correlation of per-transcript mean tail lengths between biological and technical replicates was low (higher between mutant samples). Both, however, reached high values after filtering for transcripts with greater coverage. We also compare our results with those of other methods. We identify a number of improvements that could be used in future PAT-seq experiments and, based on our results, believe that direct sequencing of poly(A) tails can become the method of choice for studying polyadenylation using the Illumina platform.
+The correlation of per-transcript mean tail lengths between biological and technical replicates was low (higher between mutant samples). Both, however, reached high values after filtering for transcripts with greater coverage. We also compare our results with those of other methods. We identify a number of improvements that could be used in future PASP experiments and, based on our results, believe that direct sequencing of poly(A) tails can become the method of choice for studying polyadenylation using the Illumina platform.
 
 \section*{Introduction}
 
@@ -142,9 +142,9 @@ The development of high-throughput PAT length assays has been slower than the de
 
 The high-throughput PAL-seq assay \cite{subtelny14} is a customized experiment on the Illumina sequencing platform involving a ``T-filling'' step similar to \cite{wilkening13} using a mixture of dTTP and biotinylated dUTP and measurement of fluorescence of labeled streptavidin bound to the clusters. After normalization based on signal from spike-ins with poly(A) tracts of known length, the measured fluorescence is converted into estimated tail lengths. The PAL-seq assay has good reproducibility (with a correlation of 0.93 between biological replicates), but considering the complexity of the protocol there is still advantage to be gained from alternative high-throughput PAT length assays, preferably based on direct sequencing of the tail.
 
-In this study we explore PAT-seq, an alternative high-throughput Illumina-based PAT assay based on the (low-throughput) G-tailing approach of \cite{kusov01}. In brief, our approach is based on G-tailing poly(A)-selected mRNA followed by fragmentation and reverse transcription using a mixture of primers targeting the poly(A)/G-tag junction and the transcript-end/poly(A) transition. The resulting cDNA fragments are sequenced using a standard Illumina RNA-seq protocol (see \textbf{Figure~1}).
+In this study we explore PASP, an alternative high-throughput Illumina-based PAT assay based on the (low-throughput) G-tailing approach of \cite{kusov01}. In brief, our approach is based on G-tailing poly(A)-selected mRNA followed by fragmentation and reverse transcription using a mixture of primers targeting the poly(A)/G-tag junction and the transcript-end/poly(A) transition. The resulting cDNA fragments are sequenced using a standard Illumina RNA-seq protocol (see \textbf{Figure~1}).
 
-We validate PAT-seq by experiments performed on wild type (WT) \textit{S.~cerevisiae} and \textit{$\Delta$ccr4-1/pan2} mutants. In addition to yeast being the most popular model organism for studying polyadenylation and developing novel PAT assays, it is known that the \textit{$\Delta$ccr4-1/pan2} mutant has more homogeneous and longer tails which better reflect the default size after synthesis in the nucleus \cite{beilharz07,traven05}. We use the prior expectation this establishes regarding both the direction and magnitude of shift in tail length when compared to the WT to assess the performance of PAT-seq. We also compare PAT-seq to the state-of-the art Illumina-based (PAL-seq) and microarray-based (PASTA) assays.
+We validate PASP by experiments performed on wild type (WT) \textit{S.~cerevisiae} and \textit{$\Delta$ccr4-1/pan2} mutants. In addition to yeast being the most popular model organism for studying polyadenylation and developing novel PAT assays, it is known that the \textit{$\Delta$ccr4-1/pan2} mutant has more homogeneous and longer tails which better reflect the default size after synthesis in the nucleus \cite{beilharz07,traven05}. We use the prior expectation this establishes regarding both the direction and magnitude of shift in tail length when compared to the WT to assess the performance of PASP. We also compare PASP to the state-of-the art Illumina-based (PAL-seq) and microarray-based (PASTA) assays.
 
 \section*{Materials and methods}
 
@@ -212,13 +212,13 @@ The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fra
 \subsection*{Quantification of tail run ``slippage'' using spike-ins}
 
 The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from Text S1). 
-However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PAT-seq data.
+However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PASP data.
 
 \subsection*{Global shift in polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants}
 
 The distribution of tail run lengths tabulated from the whole WT and mutant transcriptomes (\textbf{Figure~3A}) showed high consistency between biological replicates (compare \textbf{Figure~3} with \textbf{Figure~S1}). Both distributions are unimodal with a fat tail to the right. The right tail of the distribution is truncated in the case of the mutant samples as the largest measurable tail run is limited by the read length; the much lesser degree of truncation for the WT samples suggests that the read length of 101bp is capturing the full length of virtually all their poly(A) tails.
 
-We consistently observe an upward shift in the tail length in the \textit{$\Delta$ccr4-1/pan2} mutants: in WT samples the global mean of tail run lengths is consistently around 46, which is approximately in line with values reported by other studies (median tail length of 33 reported by \cite{subtelny14}), while in the mutants the mean length is around 71. Moreover, the global shift in tail run length (+25) is consistent with the mean of per-transcript tail run shifts (compare \textbf{Figure~3B} with \textbf{Figure~3A}). These observations are in accord with expectations, given that the mutant is supposed to have longer tails ($>$55 according to \cite{beilharz07}) due to the lack of nuclear and cytoplasmic deadenylase activity. This suggests that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
+We consistently observe an upward shift in the tail length in the \textit{$\Delta$ccr4-1/pan2} mutants: in WT samples the global mean of tail run lengths is consistently around 46, which is approximately in line with values reported by other studies (median tail length of 33 reported by \cite{subtelny14}), while in the mutants the mean length is around 71. Moreover, the global shift in tail run length (+25) is consistent with the mean of per-transcript tail run shifts (compare \textbf{Figure~3B} with \textbf{Figure~3A}). These observations are in accord with expectations, given that the mutant is supposed to have longer tails ($>$55 according to \cite{beilharz07}) due to the lack of nuclear and cytoplasmic deadenylase activity. This suggests that PASP is suitable for the assessment of global polyadenylation status in yeast.
 
 \subsection*{Coverage-dependent consistency of per-transcript tail run distributions}
 
@@ -236,35 +236,35 @@ The mean correlation between technical replicates is substantially lower in the 
 
 Regardless of low correlation at low G-tail fragment coverage, tail run distributions showed excellent consistency between WT biological replicates in the case of highly expressed transcripts (see examples in \textbf{Figure~5}). Most transcripts with high G-tail fragment coverage have longer mean tail runs in the mutant samples (\textbf{Figure~5A,B}), with the magnitude of difference being similar to the difference in global mean tail lengths, However, a few transcripts --- most notably transcript YER177W (BMH1) --- had a short mean tail length in both the WT and mutant samples (\textbf{Figure~5C}). This suggests that poly(A) tail length in this transcript might be under another specific regulatory mechanism, potentially worthy of further investigation.
 
-The consistency of the tail run distributions for transcripts such as those shown in \textbf{Figure~5} suggests that, given sufficient coverage, PAT-seq has the potential to provide a reliable assay of per-transcript mean poly(A) tail length and potentially provide information about the details of the tail length distribution (e.g.~multimodality). However, considering the lower number of high-coverage transcripts and the poor correlation with the PAL-seq assay (see below) we refrain from further downstream analyses of the per-transcript tail run lengths in this experiment.
+The consistency of the tail run distributions for transcripts such as those shown in \textbf{Figure~5} suggests that, given sufficient coverage, PASP has the potential to provide a reliable assay of per-transcript mean poly(A) tail length and potentially provide information about the details of the tail length distribution (e.g.~multimodality). However, considering the lower number of high-coverage transcripts and the poor correlation with the PAL-seq assay (see below) we refrain from further downstream analyses of the per-transcript tail run lengths in this experiment.
 
-\subsection*{Correlation between PAT-seq and previous high-throughput assays}
+\subsection*{Correlation between PASP and previous high-throughput assays}
 
-We have examined the correlation of WT mean per-transcript tail run lengths for the 465 transcripts with at least 1000 G-tail fragment coverage with results obtained from \textit{S.~cerevisiae} by the PASTA \cite{beilharz07} and PAL-seq \cite{subtelny14} protocols. There was no correlation between the PAT-seq and PAL-seq results (WT1 vs.\ PAL-seq: $r$=0.07; WT2 vs.\ PAL-seq: $r$=0.03; \textbf{Figure~S2}), despite the high correlation ($r$=0.73) of PAT-seq between biological replicates for the high coverage subset and the high correlation between PAL-seq biological replicates. The correlation between PAL-seq and PASTA results was also weak (r=0.14 for 3631 transcripts; \textbf{Figure~S3}), while correlation between PAT-seq and PASTA was negative (\textbf{Figure~S4}).
+We have examined the correlation of WT mean per-transcript tail run lengths for the 465 transcripts with at least 1000 G-tail fragment coverage with results obtained from \textit{S.~cerevisiae} by the PASTA \cite{beilharz07} and PAL-seq \cite{subtelny14} protocols. There was no correlation between the PASP and PAL-seq results (WT1 vs.\ PAL-seq: $r$=0.07; WT2 vs.\ PAL-seq: $r$=0.03; \textbf{Figure~S2}), despite the high correlation ($r$=0.73) of PASP between biological replicates for the high coverage subset and the high correlation between PAL-seq biological replicates. The correlation between PAL-seq and PASTA results was also weak (r=0.14 for 3631 transcripts; \textbf{Figure~S3}), while correlation between PASP and PASTA was negative (\textbf{Figure~S4}).
 
 The observed poor correlation between the different assays suggests that the polyadenylation status of the transcriptome might be especially sensitive to growth conditions, or alternatively can be explained by strong and reproducible biases affecting one or more of the assays. 
 Additional experiments will be necessary to further compare these alternative methods.
 
-\subsection*{The potential of PAT-seq and future directions in studying polyadenylation}
+\subsection*{The potential of PASP and future directions in studying polyadenylation}
 
-We believe that in the future, as sequencing technologies permit longer and more accurate reads, assays based on direct sequencing of the PAT will be the dominant techniques for studying the biology of polyadenylation. We also believe that PAT-seq has the potential to become the assay of choice on the Illumina platform.  The results of our pilot experiment suggest several ways to improve its properties. First, we have demonstrated that the reliability of the tail length estimates can be increased simply by increasing sequencing depth, suggesting that by using one Illumina lane per sample it might be possible to reliably assess the polyadenylation status of the complete yeast transcriptome. 
+We believe that in the future, as sequencing technologies permit longer and more accurate reads, assays based on direct sequencing of the PAT will be the dominant techniques for studying the biology of polyadenylation. We also believe that PASP has the potential to become the assay of choice on the Illumina platform.  The results of our pilot experiment suggest several ways to improve its properties. First, we have demonstrated that the reliability of the tail length estimates can be increased simply by increasing sequencing depth, suggesting that by using one Illumina lane per sample it might be possible to reliably assess the polyadenylation status of the complete yeast transcriptome. 
 
 Second, adding random barcodes to the sequencing adapter could solve the cluster detection issues and recover many lost G-tail fragments.  It may also be possible to ameliorate sequencing problems caused by the repetitive tail by introducing random mutations in the library as has been suggested in the SAPAS method \cite{fu11} or the NG-SAM approach to sequence assembly \cite{sipos12}.
 
-Third, improvements in Illumina chemistries and base calling algorithms might improve the quality of reads overlapping the tail even without any alterations to our experimental protocol. With one or more of these improvements, the PAT-seq approach could provide a practical alternative to more complicated high throughput assays such as PAL-seq or protocols based on the still relatively expensive third-generation sequencing platforms \cite{sharon13}.
+Third, improvements in Illumina chemistries and base calling algorithms might improve the quality of reads overlapping the tail even without any alterations to our experimental protocol. With one or more of these improvements, the PASP approach could provide a practical alternative to more complicated high throughput assays such as PAL-seq or protocols based on the still relatively expensive third-generation sequencing platforms \cite{sharon13}.
 
-A shortcoming of PAT-seq is that the maximum tail length which can be detected is limited by the read length. This means that for organisms with potentially longer tails (such as mammals), longer reads are needed in order to achieve sufficient dynamic range. The MiSeq Illumina platform is already capable of generating longer reads suitable for this purpose.
+A shortcoming of PASP is that the maximum tail length which can be detected is limited by the read length. This means that for organisms with potentially longer tails (such as mammals), longer reads are needed in order to achieve sufficient dynamic range. The MiSeq Illumina platform is already capable of generating longer reads suitable for this purpose.
 
-One of the most puzzling results of our pilot study is the low correlation between the PAT-seq and PAL-seq assays, even for the set of high-coverage transcripts and despite excellent reproducibility between biological replicates for both methods. While additional experiments are needed to uncover the source of this discrepancy, this observation suggests that the variability of the polyadenylation status of the yeast transcriptome in response to growth and environmental factors is yet to be uncovered.
+One of the most puzzling results of our pilot study is the low correlation between the PASP and PAL-seq assays, even for the set of high-coverage transcripts and despite excellent reproducibility between biological replicates for both methods. While additional experiments are needed to uncover the source of this discrepancy, this observation suggests that the variability of the polyadenylation status of the yeast transcriptome in response to growth and environmental factors is yet to be uncovered.
 
 \section*{Conclusions}
 
-In this study we have presented PAT-seq, a new high-throughput approach to measure poly(A) tail lengths using Illumina short read sequencing. We demonstrated the utility of this approach by estimating and comparing tail lengths from wild type \textit{S.~cerevisiae} and a deadenylase-mutant with expected longer tails. We found that, given high-enough coverage, the tail lengths can be confidently measured even in the presence of ``slippage'' noise.
+In this study we have presented PASP, a new high-throughput approach to measure poly(A) tail lengths using Illumina short read sequencing. We demonstrated the utility of this approach by estimating and comparing tail lengths from wild type \textit{S.~cerevisiae} and a deadenylase-mutant with expected longer tails. We found that, given high-enough coverage, the tail lengths can be confidently measured even in the presence of ``slippage'' noise.
 
-The distributions of tail run lengths tabulated from the whole wild type and mutant transcriptomes showed excellent consistency between biological replicates, suggesting that PAT-seq is suitable for the assessment of global polyadenylation status in yeast.
-Correlation of per-transcript mean tail lengths between biological and technical replicates was high only for transcripts with high G-tail coverage, implying that filtering-out transcripts with low coverage is an essential step in quality control of PAT-seq data.
+The distributions of tail run lengths tabulated from the whole wild type and mutant transcriptomes showed excellent consistency between biological replicates, suggesting that PASP is suitable for the assessment of global polyadenylation status in yeast.
+Correlation of per-transcript mean tail lengths between biological and technical replicates was high only for transcripts with high G-tail coverage, implying that filtering-out transcripts with low coverage is an essential step in quality control of PASP data.
 
-Based on our results we believe that direct sequencing of poly(A) tails will be the method of choice for studying polyadenylation and that after implementing the suggested improvements PAT-seq has the potential to become an assay of choice for the Illumina platform.
+Based on our results we believe that direct sequencing of poly(A) tails will be the method of choice for studying polyadenylation and that after implementing the suggested improvements PASP has the potential to become an assay of choice for the Illumina platform.
 \section*{Acknowledgements}
 
 We would like to thank Prof.\ Thomas Preiss and Stuart Archer for providing the \textit{$\Delta$ccr4-1/pan2} mutant yeast strain, Vicente Pelechano for providing the spike-in standards and helpful discussion in the planning stage and Benjamin Raeder for technical expertise.
@@ -281,7 +281,7 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \includegraphics[scale=1.75]{Figure1.png}
 \end{center}
 
-\textbf{Figure 1. Illustration of PAT-seq protocol.}
+\textbf{Figure 1. Illustration of PASP protocol.}
 }
 \newpage
 
@@ -350,7 +350,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 \includegraphics[scale=0.9]{FigureS2.png}
 \end{center}
 
-\textbf{Figure S2. Correlation of per-transcript mean tail lengths estimated by PAT-seq and PAL-seq in wild type yeast.} \textbf{A.}~Scatter plot and Pearson correlation of PAT-seq mean tail lengths at a coverage threshold of 1000 in WT1 with corresponding results from PAL-seq \cite{subtelny14}. \textbf{B.}~Scatter plot and Pearson correlation of PAT-seq mean tail lengths at a coverage threshold of 1000 in WT2 with PAL-seq.}
+\textbf{Figure S2. Correlation of per-transcript mean tail lengths estimated by PASP and PAL-seq in wild type yeast.} \textbf{A.}~Scatter plot and Pearson correlation of PASP mean tail lengths at a coverage threshold of 1000 in WT1 with corresponding results from PAL-seq \cite{subtelny14}. \textbf{B.}~Scatter plot and Pearson correlation of PASP mean tail lengths at a coverage threshold of 1000 in WT2 with PAL-seq.}
 \newpage
 
 \item[]{
@@ -367,7 +367,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 \includegraphics[scale=0.9]{FigureS4.png}
 \end{center}
 
-\textbf{Figure S4. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PAT-seq and weighted lengths obtained by the PASTA method. \textbf{A.}~WT1 vs.\ PASTA. \textbf{B.}~WT2 vs.\ PASTA. }
+\textbf{Figure S4. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PASP and weighted lengths obtained by the PASTA method. \textbf{A.}~WT1 vs.\ PASTA. \textbf{B.}~WT2 vs.\ PASTA. }
 }
 
 \end{itemize}
