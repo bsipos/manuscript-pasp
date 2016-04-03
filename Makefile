@@ -1,4 +1,4 @@
-NAME=pat_seq
+NAME=pasp
 
 all:
 	pdflatex $(NAME); bibtex $(NAME); pdflatex $(NAME); pdflatex $(NAME)
