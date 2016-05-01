@@ -17035,9 +17035,9 @@
      inkscape:window-height="1056"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="1.4458846"
-     inkscape:cx="433.99714"
-     inkscape:cy="533.00935"
+     inkscape:zoom="2.0447896"
+     inkscape:cx="285.86825"
+     inkscape:cy="248.04431"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -21730,7 +21730,7 @@
            sodipodi:role="line"
            y="0"
            x="0 7.3319998 14.688 18.024 21.360001 25.176001 30.108 37.716 45.324001 49.139999 52.476002 59.855999 67.463997 75.084 79.788002"
-           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">Tail run length</tspan></text>
+           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">Tail run length</tspan></text>
 <path
          inkscape:connector-curvature="0"
          id="path24586"
@@ -21881,7 +21881,7 @@
            sodipodi:role="line"
            y="0"
            x="0 14.2416 23.040001 32.198399 36.777599 42.3936 56.419201 65.2752 74.102402 83.232002 88.084801 92.664001 101.8224 110.9808 115.56 124.7184 133.8768 143.0352 152.1936"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">WT1 (mean: 32.6279)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">WT1 (mean: 32.6279)</tspan></text>
 <path
          inkscape:connector-curvature="0"
          id="path24666"
@@ -21893,7 +21893,7 @@
            sodipodi:role="line"
            y="0"
            x="0 12.4272 22.968 31.766399 40.924801 45.504002 51.119999 65.145599 74.001602 82.828796 91.958397 96.811203 101.3904 110.5488 119.7072 124.2864 133.44479 142.6032 151.7616"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">MUT1 (mean: 66.359)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">MUT1 (mean: 66.359)</tspan></text>
 </g><g
        transform="matrix(0.45,0,0,0.45,619.65729,677.11833)"
        id="g32703"><path
@@ -23318,7 +23318,7 @@
            sodipodi:role="line"
            y="-15.996875"
            x="252.99687 260.32886 267.68488 271.02087 274.35687 278.17288 283.10486 290.71286 298.32086 302.13687 305.47287 312.85287 320.46088 328.08087 332.78488"
-           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">Tail run length</tspan></text>
+           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">Tail run length</tspan></text>
 <path
          id="path30331"
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
@@ -23505,7 +23505,7 @@
            sodipodi:role="line"
            y="-365.19937"
            x="340.42438 354.66599 363.46439 372.62277 377.20197 382.81796 396.84357 405.69958 414.52676 423.65637 428.50919 433.08838 442.24677 451.40518 455.98438 465.14276 474.30118 483.45956 492.61798"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">WT2 (mean: 32.8252)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">WT2 (mean: 32.8252)</tspan></text>
 <path
          id="path30419"
          style="fill:#ff0000;fill-opacity:0.5;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:0.5;stroke-dasharray:none"
@@ -23519,7 +23519,9 @@
            sodipodi:role="line"
            y="-344.45251"
            x="340.42438 352.85156 363.39236 372.19077 381.34918 385.92838 391.54437 405.56998 414.42596 423.25317 432.38278 437.23557 441.81479 450.97318 460.13156 464.71078 473.86917 483.02756 492.18597 501.34436"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">MUT2 (mean: 69.2258)</tspan></text>
+           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman"><tspan
+   style="-inkscape-font-specification:Arial;font-family:Arial"
+   id="tspan26445">MUT2 (mean: 69.2258</tspan>)</tspan></text>
 </g><g
        transform="matrix(0.45,0,0,0.45,367.50368,470.65091)"
        id="g38436"><path
@@ -24930,7 +24932,7 @@
            sodipodi:role="line"
            y="0"
            x="0 7.3319998 14.688 18.024 21.360001 25.176001 30.108 37.716 45.324001 49.139999 52.476002 59.855999 67.463997 75.084 79.788002"
-           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">Tail run length</tspan></text>
+           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">Tail run length</tspan></text>
 <path
          inkscape:connector-curvature="0"
          id="path38342"
@@ -25097,7 +25099,7 @@
            sodipodi:role="line"
            y="0"
            x="0 14.2416 23.040001 32.198399 36.777599 42.3936 56.419201 65.2752 74.102402 83.232002 88.084801 92.664001 101.8224 110.9808 115.56 124.7184 133.8768 143.0352"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">WT1 (mean: 26.728)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">WT1 (mean: 26.728)</tspan></text>
 <path
          inkscape:connector-curvature="0"
          id="path38430"
@@ -25109,7 +25111,7 @@
            sodipodi:role="line"
            y="0"
            x="0 12.4272 22.968 31.766399 40.924801 45.504002 51.119999 65.145599 74.001602 82.828796 91.958397 96.811203 101.3904 110.5488 119.7072 124.2864 133.44479 142.6032 151.7616 160.92"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">MUT1 (mean: 29.2752)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">MUT1 (mean: 29.2752)</tspan></text>
 </g><g
        transform="matrix(0.45,0,0,0.45,619.65729,470.65091)"
        id="g44129"><path
@@ -26492,7 +26494,7 @@
            sodipodi:role="line"
            y="0"
            x="0 7.3319998 14.688 18.024 21.360001 25.176001 30.108 37.716 45.324001 49.139999 52.476002 59.855999 67.463997 75.084 79.788002"
-           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">Tail run length</tspan></text>
+           style="font-size:12px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">Tail run length</tspan></text>
 <path
          inkscape:connector-curvature="0"
          id="path44035"
@@ -26659,7 +26661,7 @@
            sodipodi:role="line"
            y="0"
            x="0 14.2416 23.040001 32.198399 36.777599 42.3936 56.419201 65.2752 74.102402 83.232002 88.084801 92.664001 101.8224 110.9808 115.56 124.7184 133.8768 143.0352 152.1936"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">WT2 (mean: 33.7633)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">WT2 (mean: 33.7633)</tspan></text>
 <path
          inkscape:connector-curvature="0"
          id="path44123"
@@ -26671,5 +26673,5 @@
            sodipodi:role="line"
            y="0"
            x="0 12.4272 22.968 31.766399 40.924801 45.504002 51.119999 65.145599 74.001602 82.828796 91.958397 96.811203 101.3904 110.5488 119.7072 124.2864 133.44479 142.6032 151.7616 160.92"
-           style="font-size:14.39999962px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:BitstreamVeraSans-Roman">MUT2 (mean: 27.0009)</tspan></text>
+           style="font-size:14.39999961999999911px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial">MUT2 (mean: 27.0009)</tspan></text>
 </g></g></svg>
