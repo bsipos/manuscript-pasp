@@ -207,14 +207,14 @@ Downstream analysis steps (invoked through other analysis pipeline \texttt{make}
 
 \subsection*{Characteristics of aligned fragments}
 
-The number of NVTR fragments was consistently 2--7 times higher than the number of G-tail fragments in all technical replicates. Also, the majority of the reads overlapping the poly(A) tails were sequenced as second reads, indicating that there were issues with detecting clusters having the repetitive tails as first reads (see alignment reports listed in \textbf{Text~S1}).
+The number of NVTR fragments was consistently 2.6--7.4 times higher than the number of G-tail fragments in all technical replicates. Also, the majority of the reads overlapping the poly(A) tails were sequenced as second reads, indicating that there were issues with detecting clusters having the repetitive tails as first reads (see alignment reports listed in \textbf{Text~S1}).
 
 The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fragments (26--39\%).  NVTR fragments mapped to various locations within the transcripts (see the report files listed in \textbf{Text~S1}), and for that reason we did not further investigate whether these fragments reliably define individual polyadenylation sites.
 
 \subsection*{Quantification of tail run ``slippage'' using spike-ins}
 
 The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from \textbf{Text~S1}). 
-However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 43; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PASP data.
+However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 42; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PASP data.
 
 \subsection*{Global shift in polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants}
 
@@ -292,7 +292,7 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \includegraphics[scale=1.5]{Figure2.png}
 \end{center}
 
-\textbf{Figure 2.~The distribution of the number of aligned A bases until the first non-A base (``tail runs'') in the reads mapping to the poly(A) tracts of known length of the spike-in standards.} The vertical green line marks the mean run length from all 53558 reads (44.6), while the red line marks the true length of the spike-in poly(A) tracts (43).}
+\textbf{Figure 2.~The distribution of the number of aligned A bases until the first non-A base (``tail runs'') in the reads mapping to the poly(A) tracts of known length of the spike-in standards.} The vertical green line marks the mean run length from all 53558 reads (44.6).}
 \newpage
 
 \item[]{
