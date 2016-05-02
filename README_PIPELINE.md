@@ -1,4 +1,4 @@
-A pipeline to analyse PAT-seq data
+A pipeline to analyse PASP data
 ==================================
 
 Reference
@@ -6,7 +6,7 @@ Reference
 
 This repository contains the pipeline and raw results described in the manuscript:
 
-- Botond Sipos, Adrian M. Stütz, Greg Slodkowicz, Tim Massingham, Jan Korbel, Nick Goldman: *PAT-seq - a whole-transcriptome poly(A) tail length determination assay for the Illumina platform*.
+- Botond Sipos, Adrian M. Stütz, Greg Slodkowicz, Tim Massingham, Jan Korbel, Nick Goldman: *PASP - a whole-transcriptome poly(A) tail length determination assay for the Illumina platform*.
 
 Click [here](https://github.com/sbotond/paper-pat-seq/blob/master/ExpInfo/README.md) for more details on the wetlab experiment.
 
@@ -54,7 +54,6 @@ Sequencing data are available in the [ArrayExpress database](http://www.ebi.ac.u
 | MUT2C     |  [http://bit.ly/PAT-seq-MUT2C_aln_log](http://bit.ly/PAT-seq-MUT2C_aln_log) | [http://bit.ly/PAT-seq-MUT2C_aln_pdf](http://bit.ly/PAT-seq-MUT2C_aln_pdf) |
 | MUT2D     |  [http://bit.ly/PAT-seq-MUT2D_aln_log](http://bit.ly/PAT-seq-MUT2D_aln_log) | [http://bit.ly/PAT-seq-MUT2D_aln_pdf](http://bit.ly/PAT-seq-MUT2D_aln_pdf) |
 
-
 ### Parsing alignments
 
 |   Sample  |   Parse log    |     Parse report       |
@@ -76,7 +75,6 @@ Sequencing data are available in the [ArrayExpress database](http://www.ebi.ac.u
 | MUT2C     |  [http://bit.ly/PAT-seq-MUT2C_parse_log](http://bit.ly/PAT-seq-MUT2C_parse_log) | [http://bit.ly/PAT-seq-MUT2C_parse_pdf](http://bit.ly/PAT-seq-MUT2C_parse_pdf) |
 | MUT2D     |  [http://bit.ly/PAT-seq-MUT2D_parse_log](http://bit.ly/PAT-seq-MUT2D_parse_log) | [http://bit.ly/PAT-seq-MUT2D_parse_pdf](http://bit.ly/PAT-seq-MUT2D_parse_pdf) |
 
-
 ### Quantifying tail length slippage using spike-in standards
 
 - Tail run lengths until the first 1-5 non-A bases in reads mapped to spike-in poly(A) tracts [PDF](http://bit.ly/PAT-seq_error_thr)
@@ -86,6 +84,18 @@ Sequencing data are available in the [ArrayExpress database](http://www.ebi.ac.u
 
 |   Comparison  |   Test log    |     Test report       |   Results |
 |:---------:|:------------------:|:---------------------------:|:------------------------------:|
+| WT1 vs. MUT1     |  [TXT](http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_log) | [PDF](http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_pdf) | [CSV](http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_trs_tab) |
+| WT2 vs. MUT2     |  [TXT](http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_log) | [PDF](http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_pdf) | [CSV](http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_trs_tab) |
+
+### Tail run distributions from all transcripts with G-tail coverage > 1000
+
+- [WT1](http://bit.ly/PAT-seq-CLS_WT1_pdf)
+- [WT2](http://bit.ly/PAT-seq_CLS_WT2_pdf)
+- [MUT1](http://bit.ly/PAT-seq-CLS_MUT1_pdf)
+- [MUT2](http://bit.ly/PAT-seq-CLS_MUT2_pdf)
+
+### Cross-study correlation
+
 | WT1 vs. MUT1     |  [http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_log](http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_log) | [http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_pdf](http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_pdf) | [http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_trs_tab](http://bit.ly/PAT-seq-TEST_WT1_vs_MUT1_trs_tab) |
 | WT2 vs. MUT2     |  [http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_log](http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_log) | [http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_pdf](http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_pdf) | [http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_trs_tab](http://bit.ly/PAT-seq-TEST_WT2_vs_MUT2_trs_tab) |
 
@@ -127,7 +137,7 @@ usage: patsy-align [-h] -1 fq1 -2 fq2 -f ref [-o outdir] [-s stats_pickle]
                    [-l gtail_sig] [-G gtag_min] [-N max_N] [-I min_fsize]
                    [-X max_fsize] [-p nr_threads] [-r report]
 
-Align PAT-seq reads using Bowtie2 (1.1).
+Align PASP reads using Bowtie2 (1.1).
 
 optional arguments:
   -h, --help       show this help message and exit
@@ -146,14 +156,14 @@ optional arguments:
   -r report        Report PDF.
 ```
 
-### *patsy-parse* - parse classified and aligned PAT-seq read pairs
+### *patsy-parse* - parse classified and aligned PASP read pairs
 
 ```
 usage: patsy-parse [-h] -g gtail_sam -n nvtr_sam -d dataset_id -f ref
                    [-l gtail_sig] [-G gtag_min] [-N max_N] [-e err_tol]
                    [-o out_pickle] [-i tr_list] [-q min_q] [-r report] [-t]
 
-Parse classified and aligned PAT-seq read pairs (1.1).
+Parse classified and aligned PASP read pairs (1.1).
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -172,7 +182,7 @@ optional arguments:
   -t             Plot per-transcript coverage reports.
 ```
 
-### *patsy-test* - test for differential polyadenylation in PAT-seq data
+### *patsy-test* - test for differential polyadenylation in PASP data
 
 ```
 usage: patsy-test [-h] -a [a_pickles [a_pickles ...]] -na a_name -b
@@ -182,7 +192,7 @@ usage: patsy-test [-h] -a [a_pickles [a_pickles ...]] -na a_name -b
                   [-otr out_runs_prefix] [-orr out_rep_prefix] [-r report]
                   [-t]
 
-Test for differential polyadenylation in PAT-seq data (1.1).
+Test for differential polyadenylation in PASP data (1.1).
 
 optional arguments:
   -h, --help            show this help message and exit
