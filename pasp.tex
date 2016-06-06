@@ -1,4 +1,3 @@
-
 % Version 1.0 January 2009
 %
 % To compile to pdf, run:
@@ -97,19 +96,19 @@
 % Insert Author names, affiliations and corresponding author email.
 \\
 \vspace{5mm}
-Botond Sipos$^{1 \ast \dagger}$, 
+Botond Sipos$^{1, \ast, \dagger}$, 
 Adrian M. St\"utz$^{2}$, 
 Greg Slodkowicz$^{1}$,
-Tim Massingham$^{1}$\footnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX4 4GA, United Kingdom.},
-Jan Korbel$^{2}$, 
-Nick Goldman$^{1}$
+Tim Massingham$^{1,}$\footnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX4 4GA, United Kingdom.},
+Jan~Korbel$^{2}$, and 
+Nick~Goldman$^{1}$
 \\
 \vspace{5mm}
-$^1$European Molecular Biology Laboratory, European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridge, United Kingdom
+$^1$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), Wellcome Genome Campus, Hinxton, Cambridge, United Kingdom
 \\
 $^2$European Molecular Biology Laboratory, Genome Biology Unit, Heidelberg, Germany 
 \\
-$^\ast$E-mail: sbotond@ebi.ac.uk
+$^\ast$E-mail: sbotond@gmail.com
 \\
 \vspace{5mm}
 \textbf{Keywords:} transcriptomics; RNA-seq; poly(A) tail; PAT; high-throughput assay; PASP
@@ -120,7 +119,9 @@ $^\ast$E-mail: sbotond@ebi.ac.uk
 
 The poly(A) tail, co-transcriptionally added to most eukaryotic mRNAs, plays an important role in post-transcriptional regulation through modulating mRNA stability and translational efficiency. The length of the poly(A) tail is dynamic, decreasing or increasing in response to various stimuli through the action of enzymatic complexes, and changes in tail length are exploited in regulatory pathways implicated in various biological processes.
 
-To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PASP (`poly(A) tail sequencing protocol'), a whole-transcriptome approach to measure tail lengths  --- including a computational pipeline implementing all necessary analyses. PASP uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
+To date, assessment of poly(A) tail length has mostly relied on protocols targeting only a few transcripts. We present PASP 
+(`{\underline{p}}oly({\underline{A}}) tail {\underline{s}}equencing {\underline{p}}rotocol'), 
+a whole-transcriptome approach to measure tail lengths  --- including a computational pipeline implementing all necessary analyses. PASP uses direct Illumina sequencing of cDNA fragments obtained through G-tailing of poly(A)-selected mRNA followed by fragmentation and reverse transcription. 
 
 Analysis of reads corresponding to spike-in poly(A) tracts of known length indicated that mean tail lengths can be confidently measured, given sufficient coverage. We further explored the utility of our approach by comparing tail lengths estimated from wild type and \textit{$\Delta$ccr4-1/pan2} mutant yeasts. The yeast whole-transcriptome tail length distributions showed high consistency between biological replicates, and the expected upward shift in tail lengths in the mutant samples was detected. This suggests that PASP is suitable for the assessment of global polyadenylation status in yeast.
 
@@ -142,17 +143,18 @@ The development of high-throughput PAT length assays has been slower than the de
 
 The high-throughput PAL-seq assay \cite{subtelny14} is a customized experiment on the Illumina sequencing platform involving a ``T-filling'' step similar to \cite{wilkening13} using a mixture of dTTP and biotinylated dUTP and measurement of fluorescence of labeled streptavidin bound to the clusters. After normalization based on signal from spike-ins with poly(A) tracts of known length, the measured fluorescence is converted into estimated tail lengths. The PAL-seq assay has good reproducibility (with a correlation of 0.93 between biological replicates), but considering the complexity of the protocol there is still advantage to be gained from alternative high-throughput PAT length assays, preferably based on direct sequencing of the tail.
 
-In this study we explore PASP, an alternative high-throughput Illumina-based PAT assay based on the (low-throughput) G-tailing approach of \cite{kusov01}. In brief, our approach is based on G-tailing poly(A)-selected mRNA followed by fragmentation and reverse transcription using a mixture of primers targeting the poly(A)/G-tag junction and the transcript-end/poly(A) transition. The resulting cDNA fragments are sequenced using a standard Illumina RNA-seq protocol (see \textbf{Figure~1}).
+In this study we explore PASP, an alternative high-throughput Illumina-based PAT assay based on the (low-throughput) G-tailing approach of \cite{kusov01}. In brief, our approach is based on G-tailing poly(A)-selected mRNA followed by fragmentation and reverse transcription using a mixture of primers targeting the poly(A)/G-tag junction and the transcript-end/poly(A) transition. The resulting cDNA fragments are sequenced using a standard Illumina RNA-seq protocol.
 
 We validate PASP by experiments performed on wild type (WT) \textit{S.~cerevisiae} and \textit{$\Delta$ccr4-1/pan2} mutants. In addition to yeast being the most popular model organism for studying polyadenylation and developing novel PAT assays, it is known that the \textit{$\Delta$ccr4-1/pan2} mutant has more homogeneous and longer tails which better reflect the default size after synthesis in the nucleus \cite{beilharz07,traven05}. We use the prior expectation this establishes regarding both the direction and magnitude of shift in tail length when compared to the WT to assess the performance of PASP. We also compare PASP to the state-of-the art Illumina-based (PAL-seq) and microarray-based (PASTA) assays.
 
-\note{During the preparation of this manuscript an approach similar to PASP got published \cite{harrison15}, however we refrain from comparing it to our protocol.}
+During the preparation of this manuscript, an approach similar to PASP was published \cite{harrison15}. Due to the time and expense needed to compare this to our protocol, we leave this for a future study.
 
 \section*{Materials and methods}
 
 \subsection*{RNA isolation}
 
-WT yeast (BY4741, which is derived from S288c) and \textit{$\Delta$ccr4-1/pan2} \cite{beilharz07} were single colony-streaked on YPAD-agar plates, and two individual colonies each were inoculated in 2ml YPAD medium and grown o.n. at 30 at 180rpm. OD was measured and 7$\times$10$^7$ cells were pelleted, resuspended in 2ml Y1 medium (2{\mul} beta-ME, 150{\mul} zymolase) and incubated for 30min at 30{\C} in a waterbath. After centrifugation, the pellet was lysed in buffer RLT and processed according to the yeast protocol of the Qiagen RNeasy kit. Yield and quality of total RNA was measured with Nanodrop and confirmed by Agilent RNA Nano chip (RIN 10). A DNase digestion was performed on 20$\mathrm{\mu g}$ totalRNA using Turbo DNase (Life Technologies), followed by an RNeasy column cleanup step and elution into 30{\mul} nuclease free water (Ambion).
+WT yeast (BY4741, which is derived from S288c) and \textit{$\Delta$ccr4-1/pan2} \cite{beilharz07} were single colony-streaked on YPAD-agar plates, and two individual colonies each were inoculated in 2ml YPAD medium and grown o.n.\ at 30{\C} at 180rpm. 
+OD was measured and 7$\times$10$^7$ cells were pelleted, resuspended in 2ml Y1 medium (2{\mul} beta-ME, 150{\mul} zymolase) and incubated for 30min at 30{\C} in a waterbath. After centrifugation, the pellet was lysed in buffer RLT and processed according to the yeast protocol of the Qiagen RNeasy kit. Yield and quality of total RNA was measured with Nanodrop and confirmed by Agilent RNA Nano chip (RIN 10). A DNase digestion was performed on 20$\mathrm{\mu g}$ totalRNA using Turbo DNase (Life Technologies), followed by an RNeasy column cleanup step and elution into 30{\mul} nuclease free water (Ambion).
 
 \subsection*{Poly(A) selection}
 
@@ -161,7 +163,6 @@ Two rounds of poly(A) selection were performed using the TruSeq RNA Sample Prepa
 \subsection*{Spike-in control}
 
 20{\mul} of spike-in \textit{in vitro} transcripts with a known A$_{42}$ stretch \cite{pelechano13} were added. 
-\note{NG: If it's A$_{42}$, how come everywhere else we now state that the expected A length is 43? BS: Well, Adrian pointed it out that due to the way we are counting the As we will count 42. I never really gave a throught to this just trusted him. This is also one of the minor issues we keep coming back to. But I will look at the code and try to convince myself that he is right. NG: I thought Adrian's implication was that using A$_{42}$ meant we would somehow count 42+1=43, but I am not sure why, or whether he is right. I think it is important that we resolve this and use the right answer consistently, otherwise we look sloppy and referees are more likely to look for problems elsewhere too. BS: Changed it from 43 to 42 elsewhere.}
 A cleanup step was performed using the RNeasy MinElute Cleanup Kit (Qiagen) according to protocol, eluting with 14{\mul} water.
 
 \subsection*{G-tailing and fragmentation}
@@ -170,7 +171,7 @@ The USB Poly(A) Tail-Length Assay kit (Affymetrix) was used with several modific
 
 \subsection*{cDNA synthesis}
 
-1{\mul} TTTTVN (16.7$\mathrm{\mu M}$) and 1{\mul} CCCCCCTT (50$\mathrm{\mu M}$) custom primers (both Sigma) were added to the 15{\mul} fragmented RNA, primed by incubation at 65{\C} for 5min and put on ice. 1$^\mathrm{st}$ strand cDNA synthesis was performed using the 1$^\mathrm{st}$ strand mastermix (Illumina TruSeq RNA kit) and SuperscriptII enzyme (Life Technologies) by incubating at 25{\C} for 10min, 42{\C} for 50min and 70{\C} for 15min, and cooled to 4{\C} in a MJ-Mini thermocycler (Biorad). 2$^\mathrm{nd}$ strand synthesis was performed by addition of 25{\mul} 2$^\mathrm{nd}$ strand master mix and incubation for 1h at 16{\C}.
+1{\mul} TTTTVN (16.7$\mathrm{\mu M}$) and 1{\mul} CCCCCCTT (50$\mathrm{\mu M}$) custom primers (both Sigma) were added to the 15{\mul} fragmented RNA, primed by incubation at 65{\C} for 5min and put on ice. First strand cDNA synthesis was performed using the First Strand Master Mix (Illumina TruSeq RNA kit) and SuperscriptII enzyme (Life Technologies) by incubating at 25{\C} for 10min, 42{\C} for 50min and 70{\C} for 15min, and cooled to 4{\C} in a MJ-Mini thermocycler (Biorad). Second strand synthesis was performed by addition of 25{\mul} Second Strand Master Mix and incubation for 1h at 16{\C}.
 
 \subsection*{NGS library preparation}
 
@@ -179,11 +180,11 @@ End repair was performed by adding 10{\mul} Resuspension buffer and 40{\mul} End
 After another AMPure XP cleanup step using 160{\mul} beads and eluting into 17.5{\mul} Resuspension buffer, the A-overhang addition step was performed. 12.5{\mul} A-tailing mix were added and incubated at 37{\C} for 30min at 750rpm, followed by 5min at 70{\C} and put on ice. Adapter ligation used 2.5{\mul} of a 1:40 dilution of Adapter oligo mix (Agilent Sureselect v4 kit), 2.5{\mul} Resuspension solution and 2.5{\mul} DNA ligase mix, incubated at 30{\C} for 10min in a water bath and stopped by addition of 5{\mul} Stop ligase mix. The adapter-ligated cDNA library was cleaned up by two rounds of AMPure XP using first 42{\mul} of AMPure XP beads and eluting in 50{\mul} Resuspension buffer and then using 50{\mul} AMPure XP beads and eluting in 40{\mul} Resuspension buffer.
 
 Next, a size selection step was performed to create four technical replicates between 300--325bp, 325--350bp, 400--425bp and 425--450bp. For this, the purified adapter ligated cDNA was loaded on a 1.5\% Agarose gel and separated for 2h at 120V. Using SybrSafe (Invitrogen) as dye and a Dark Reader transilluminator (Clare Chemical Research), narrow bands were cut using 100bp marker as guidance and gel extracted using the Nucleospin Gel and PCR Cleanup kit (Macherey-Nagel) and eluted in 22{\mul} NE buffer.
-Two sequential rounds of PCR were performed to introduce barcodes and amplify the cDNA library. First, the Sureselect primer and Sureselect ILM Indexing Pre-Capture PCR reverse primer were used with the Phusion HF 2x mix in 50{\mul} in a MJ Mini thermocycler as follows: 2min 98{\C}, followed by 5 cycles of 30sec 98{\C}, 30sec 65{\C}, 1min at 72{\C}, and a final 72{\C} step for 10min. Next, an AMPure XP cleanup step was performed using 90{\mul} AMPure XP beads and eluting into 23{\mul} water. Afterwards, a 2$^\mathrm{nd}$ PCR was performed using the Sureselect ILM Indexing Post Capture Forward PCR primer and a different PCR Primer Index primer/sample together with the Phusion HF 2x mix in 50{\mul} in a MJ Mini thermocycler as follows: 2min 98{\C}, followed by 13--15 cycles of 30sec 98{\C}, 30sec 57{\C}, 1min at 72{\C}, and a final 72{\C} step for 10min. After a final AMPure XP cleanup step using 90{\mul} beads, the final library was eluted in 20{\mul} water, quantified with the Qubit HS dsDNA kit and pooled equimolarly.
+Two sequential rounds of PCR were performed to introduce barcodes and amplify the cDNA library. First, the Sureselect primer and Sureselect ILM Indexing Pre-Capture PCR reverse primer were used with the Phusion HF 2x mix in 50{\mul} in a MJ Mini thermocycler as follows: 2min 98{\C}, followed by 5 cycles of 30sec 98{\C}, 30sec 65{\C}, 1min at 72{\C}, and a final 72{\C} step for 10min. Next, an AMPure XP cleanup step was performed using 90{\mul} AMPure XP beads and eluting into 23{\mul} water. Afterwards, a second PCR was performed using the Sureselect ILM Indexing Post Capture Forward PCR primer and a different PCR Primer Index primer/sample together with the Phusion HF 2x mix in 50{\mul} in a MJ Mini thermocycler as follows: 2min 98{\C}, followed by 13--15 cycles of 30sec 98{\C}, 30sec 57{\C}, 1min at 72{\C}, and a final 72{\C} step for 10min. After a final AMPure XP cleanup step using 90{\mul} beads, the final library was eluted in 20{\mul} water, quantified with the Qubit HS dsDNA kit and pooled equimolarly.
 
 \subsection*{Illumina sequencing}
 
-All 16 pooled barcoded libraries were sequenced on one HiSeq2000 lane in 2 $\times$ 101bp mode. Raw data has been deposited to Array Express under accession number \href{http://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2456/}{E-MTAB-2456}.
+All 16 pooled barcoded libraries were sequenced on one HiSeq2000 lane in 2 $\times$ 101bp mode. Raw data have been deposited to Array Express under accession number \href{http://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2456/}{E-MTAB-2456}.
 
 \subsection*{Data analysis}
 
@@ -214,31 +215,31 @@ The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fra
 \subsection*{Quantification of tail run ``slippage'' using spike-ins}
 
 The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from \textbf{Text~S1}). 
-However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.\ 42; see \textbf{Figure~2}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PASP data.
+However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.~42; see \textbf{Figure~1}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PASP data.
 
 \subsection*{Global shift in polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants}
 
-The distribution of tail run lengths tabulated from the whole WT and mutant transcriptomes (\textbf{Figure~3A}) showed high consistency between biological replicates (compare \textbf{Figure~3} with \textbf{Figure~S1}). Both distributions are unimodal with a fat tail to the right. The right tail of the distribution is truncated in the case of the mutant samples as the largest measurable tail run is limited by the read length; the much lesser degree of truncation for the WT samples suggests that the read length of 101bp is capturing the full length of virtually all their poly(A) tails.
+The distribution of tail run lengths tabulated from the whole WT and mutant transcriptomes (\textbf{Figure~2A}) showed high consistency between biological replicates (compare \textbf{Figure~2} with \textbf{Figure~S1}). Both distributions are unimodal with a fat tail to the right. The right tail of the distribution is truncated in the case of the mutant samples as the largest measurable tail run is limited by the read length; the much lesser degree of truncation for the WT samples suggests that the read length of 101bp is capturing the full length of virtually all their poly(A) tails.
 
-We consistently observe an upward shift in the tail length in the \textit{$\Delta$ccr4-1/pan2} mutants: in WT samples the global mean of tail run lengths is consistently around 46, which is approximately in line with values reported by other studies (median tail length of 33 reported by \cite{subtelny14}), while in the mutants the mean length is around 71. Moreover, the global shift in tail run length (+25) is consistent with the mean of per-transcript tail run shifts (compare \textbf{Figure~3B} with \textbf{Figure~3A}). These observations are in accord with expectations, given that the mutant is supposed to have longer tails ($>$55 according to \cite{beilharz07}) due to the lack of nuclear and cytoplasmic deadenylase activity. This suggests that PASP is suitable for the assessment of global polyadenylation status in yeast.
+We consistently observe an upward shift in the tail length in the \textit{$\Delta$ccr4-1/pan2} mutants: in WT samples the global mean of tail run lengths is consistently around 46, which is approximately in line with values reported by other studies (median tail length of 33 reported by \cite{subtelny14}), while in the mutants the mean length is around 71. Moreover, the global shift in tail run length (+25) is consistent with the mean of per-transcript tail run shifts (compare \textbf{Figure~2B} with \textbf{Figure~2A}). These observations are in accord with expectations, given that the mutant is supposed to have longer tails ($>$55 according to \cite{beilharz07}) due to the lack of nuclear and cytoplasmic deadenylase activity. This suggests that PASP is suitable for the assessment of global polyadenylation status in yeast.
 
 \subsection*{Coverage-dependent consistency of per-transcript tail run distributions}
 
 Despite the consistent global tail run distributions, the correlation of per-transcript mean tail run lengths between biological replicates is not high, both in the case of wild type and mutant samples (WT1 vs.\ WT2: $r$=0.25; MUT1 vs.\ MUT2: $r$=0.46).
 However, the correlation increases after applying coverage filtering with increasing thresholds. After filtering for minimum G-tail coverage of 400 fragments, we are left with 1211 transcripts (out of 3951 detected overall) in wild type and 673 (out of 4646 detected) in the mutant samples, with per-transcript mean tail run correlations of 0.54 and 0.95, respectively.
-At a coverage threshold of 1000 the correlation reaches high values both between wild type and mutant samples (WT1 vs.\ WT2: r=0.73; MUT1 vs.\ MUT2: r=0.98; \textbf{Figure 4A}), but we lose a greater proportion of the detected transcripts (465 transcripts retained in the WT samples; 315 transcripts retained in the mutant). 
+At a coverage threshold of 1000 the correlation reaches high values both between wild type and mutant samples (WT1 vs.\ WT2: r=0.73; MUT1 vs.\ MUT2: r=0.98; \textbf{Figure 3A}), but we lose a greater proportion of the detected transcripts (465 transcripts retained in the WT samples; 315 transcripts retained in the mutant). 
 This behavior is consistent with the observations drawn above from the analysis of spike-in reads, and also explains the consistency of the global tail run distributions which are necessarily dominated by more abundantly expressed transcripts.
 
 
 The increase of correlation between mutant and WT biological replicates showed some interesting differences: correlation between the mutant replicates is already high at low coverage thresholds and initially increases with a higher rate; this is, however, coupled with a higher number of discarded transcripts. The higher initial and post-filtering correlation between the mutant replicates likely has both technical and biological causes. First, the tails in mutants are likely to stay closer to their initial length and so are expected to be more homogeneous \cite{traven05,beilharz07}. Second, tails in the mutants are closer to the read length; hence the drift towards longer lengths is expected to have a smaller confounding effect.
 
-The mean correlation between pairs of technical replicates showed a similar behaviour at increasing coverage thresholds in the case of the two mutant samples (\textbf{Figure~4B}), both curves being similar in shape to the change in correlation between mutant biological replicates. This suggests that the mutant samples suffer from comparable amount of technical noise and that this is the likely cause of reduced correlations at lower coverage thresholds.
+The mean correlation between pairs of technical replicates showed a similar behaviour at increasing coverage thresholds in the case of the two mutant samples (\textbf{Figure~3B}), both curves being similar in shape to the change in correlation between mutant biological replicates. This suggests that the mutant samples suffer from comparable amount of technical noise and that this is the likely cause of reduced correlations at lower coverage thresholds.
 
-The mean correlation between technical replicates is substantially lower in the case of WT samples (\textbf{Figure~4B}), which can be explained both by higher intra-transcript variability or higher levels of technical noise. The correlations are especially low in the the case of WT2. This makes it likely that WT2 suffers from the highest levels of technical noise, which can be partly responsible for the lower correlation between WT biological replicates.
+The mean correlation between technical replicates is substantially lower in the case of WT samples (\textbf{Figure~3B}), which can be explained by either higher intra-transcript variability or higher levels of technical noise. The correlations are especially low in the the case of WT2. This makes it likely that WT2 suffers from the highest levels of technical noise, which can be partly responsible for the lower correlation between WT biological replicates.
 
-Regardless of low correlation at low G-tail fragment coverage, tail run distributions showed excellent consistency between WT biological replicates in the case of highly expressed transcripts (see examples in \textbf{Figure~5}). Most transcripts with high G-tail fragment coverage have longer mean tail runs in the mutant samples (\textbf{Figure~5A,B}), with the magnitude of difference being similar to the difference in global mean tail lengths, However, a few transcripts --- most notably transcript YER177W (BMH1) --- had a short mean tail length in both the WT and mutant samples (\textbf{Figure~5C}). This suggests that poly(A) tail length in this transcript might be under another specific regulatory mechanism, potentially worthy of further investigation.
+Regardless of low correlation at low G-tail fragment coverage, tail run distributions showed excellent consistency between WT biological replicates in the case of highly expressed transcripts (see examples in \textbf{Figure~4}). Most transcripts with high G-tail fragment coverage have longer mean tail runs in the mutant samples (\textbf{Figure~4A,B}), with the magnitude of difference being similar to the difference in global mean tail lengths, However, a few transcripts --- most notably transcript YER177W (BMH1) --- had a short mean tail length in both the WT and mutant samples (\textbf{Figure~4C}). This suggests that poly(A) tail length in this transcript might be under another specific regulatory mechanism, potentially worthy of further investigation.
 
-The consistency of the tail run distributions for transcripts such as those shown in \textbf{Figure~5} suggests that, given sufficient coverage, PASP has the potential to provide a reliable assay of per-transcript mean poly(A) tail length and potentially provide information about the details of the tail length distribution (e.g.~multimodality). However, considering the lower number of high-coverage transcripts and the poor correlation with the PAL-seq assay (see below) we refrain from further downstream analyses of the per-transcript tail run lengths in this experiment.
+The consistency of the tail run distributions for transcripts such as those shown in \textbf{Figure~4} suggests that, given sufficient coverage, PASP has the potential to provide a reliable assay of per-transcript mean poly(A) tail length and potentially provide information about the details of the tail length distribution (e.g.~multimodality). However, considering the lower number of high-coverage transcripts and the poor correlation with the PAL-seq assay (see below) we refrain from further downstream analyses of the per-transcript tail run lengths in this experiment.
 
 \subsection*{Correlation between PASP and previous high-throughput assays}
 
@@ -271,28 +272,22 @@ Based on our results we believe that direct sequencing of poly(A) tails will be 
 
 We would like to thank Prof.\ Thomas Preiss and Stuart Archer for providing the \textit{$\Delta$ccr4-1/pan2} mutant yeast strain, Vicente Pelechano for providing the spike-in standards and helpful discussion in the planning stage and Benjamin Raeder for technical expertise.
 
-BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinary Postdoc (EIPOD) under Marie Curie Actions (COFUND). AMS, GS, TM, JK and NG were supported by EMBL.  GS is a member of Wolfson College, University of Cambridge.
+BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinary Postdoc (EIPOD) Fellowship under Marie Curie Actions (COFUND). AMS, GS, TM, JK and NG were supported by EMBL.  GS is a member of Wolfson College, University of Cambridge.
 
 \bibliography{pasp} 
+\newpage
+
 \section*{Figures}
 \vspace{1cm}
 
 \begin{itemize}
 \item[]{
 \begin{center}
-\includegraphics[scale=1.75]{Figure1.png}
-\end{center}
-
-\textbf{Figure 1. Illustration of PASP protocol.}
-}
-\newpage
-
-\item[]{
-\begin{center}
 \includegraphics[scale=1.5]{Figure2.png}
 \end{center}
 
-\textbf{Figure 2.~The distribution of the number of aligned A bases until the first non-A base (``tail runs'') in the reads mapping to the poly(A) tracts of known length of the spike-in standards.} The vertical green line marks the mean run length from all 53558 reads (44.6).}
+\textbf{Figure 1.~The distribution of the number of aligned A bases until the first non-A base (``tail runs'') in the reads mapping to the poly(A) tracts of known length of the spike-in standards.} The vertical green line marks the mean run length from all 53558 reads (44.6) ; the true length is 42.
+}
 \newpage
 
 \item[]{
@@ -300,7 +295,7 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \includegraphics[scale=0.9]{Figure3.png}
 \end{center}
 
-\textbf{Figure 3. Shift in global polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants.} \textbf{A}.~Distribution of tail run lengths from all transcripts in the wild type (WT1, blue) and the mutant (MUT1, red) samples. The coloured vertical lines indicate the means of the respective distributions.
+\textbf{Figure 2. Shift in global polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants.} \textbf{A}.~Distribution of tail run lengths from all transcripts in the wild type (WT1, blue) and the mutant (MUT1, red) samples. The coloured vertical lines indicate the means of the respective distributions.
 \textbf{B}.~The distribution of significant (Mann-Whitney U-test, $p < 0.05$) per-transcript mean tail run length differences (MUT1 - WT1).
 }
 \newpage
@@ -310,7 +305,7 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \includegraphics[scale=0.9]{Figure4.png}
 \end{center}
 
-\textbf{Figure 4. Pearson correlation between biological and technical replicates at different G-tail fragment coverage thresholds.} \textbf{A}.~Correlation between biological replicates.  \textbf{B}.~Average correlation between technical replicates from a given sample.}
+\textbf{Figure 3. Pearson correlation between biological and technical replicates at different G-tail fragment coverage thresholds.} \textbf{A}.~Correlation between biological replicates.  \textbf{B}.~Average correlation between technical replicates from a given sample.}
 \newpage
 
 \item[]{
@@ -318,9 +313,9 @@ BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinar
 \includegraphics[scale=0.9]{Figure5.png}
 \end{center}
 
-\textbf{Figure 5. Tail run distributions for selected transcripts with high G-tail fragment coverage in WT1 and MUT1 (left) and 
+\textbf{Figure 4. Tail run distributions for selected transcripts with high G-tail fragment coverage in WT1 and MUT1 (left) and 
 WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072W. \textbf{B.}~HSP12/YFL014W. \textbf{C.}~BMH1/YER177W.
-\note{Botond to add the coverage values for these three examples when possible, but no need to delay submission for this --- they could be added later. BS: I would rather not do this.}
+%\note{NG: add the coverage values for these three examples when possible, but no need to delay submission for this --- they could be added later. BS: I would rather not do this.  NG: Why not? I thought it would be nice since they have been selected as interesting cases with higher coverage.BS: Unfortunately this already falls in the category of too much work. This would require to dive into the project code again and write new code to find out the coverages.  NG: OK.}
 }
 
 \end{itemize}
@@ -360,15 +355,15 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 
 \item[]{
 \begin{center}
-\includegraphics[scale=0.9]{FigureS4.png}
+\includegraphics[scale=0.45]{FigureS4.png}
 \end{center}
 
-\textbf{Figure S4. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PASP and weighted lengths obtained by the PASTA method. \textbf{A.}~WT1 vs.\ PASTA. \textbf{B.}~WT2 vs.\ PASTA. }
+\textbf{Figure S4. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PASP and weighted lengths obtained by the PASTA method. \textbf{A.}~WT1 vs.\ PASTA. \textbf{B.}~WT2 vs.\ PASTA.}
 }
+\newpage
 
 \item[]{
-\note{NG: Not sure what is the best way to include the separate Text\_S1.pdf document in here.  We could put some sort of `see following pages' comment here, and then use a program to insert the pdf pages next?  BS: I will place this last in the ArXiv version and paste the supporting text after. For the Plos version I think it goes to the submission form. NG: I don't understand your response: but all I am looking for is that readers/reviewers can clearly understand how to get the information.  For the PLoS version, I think it is important that reviewers have access to a PDF version that *looks* OK:  I suspect that the appearance that all the supporting info is available is more important than the actual info. BS: I will concatenate it with the Supporting text.} \\
-\textbf{Text S1. Index of selected raw results.}
+\section{\textbf{Text S1. Index of selected raw results.}}
 }
 
 \end{itemize}
