@@ -101,14 +101,15 @@ Adrian M. St\"utz$^{2}$,
 Greg Slodkowicz$^{1}$,
 Tim Massingham$^{1,}$\footnote{Current address: Oxford Nanopore Technologies, Edmund Cartwright House, 4 Robert Robinson Avenue, Oxford Science Park, Oxford, OX4 4GA, United Kingdom.},
 Jan~Korbel$^{2}$, and 
-Nick~Goldman$^{1}$
+Nick~Goldman$^{1, \ast}$
 \\
 \vspace{5mm}
-$^1$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), Wellcome Genome Campus, Hinxton, Cambridge, United Kingdom
+$^1$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), \\
+Wellcome Genome Campus, Hinxton, Cambridge, United Kingdom
 \\
 $^2$European Molecular Biology Laboratory, Genome Biology Unit, Heidelberg, Germany 
 \\
-$^\ast$E-mail: sbotond@gmail.com
+$^\ast$E-mail: sbotond@gmail.com; goldman@ebi.ac.uk
 \\
 \vspace{5mm}
 \textbf{Keywords:} transcriptomics; RNA-seq; poly(A) tail; PAT; high-throughput assay; PASP
@@ -188,7 +189,7 @@ All 16 pooled barcoded libraries were sequenced on one HiSeq2000 lane in 2 $\tim
 
 \subsection*{Data analysis}
 
-The data analysis pipeline with documentation, logs and selected raw results (see also \textbf{Text S1}) is available at \href{https://github.com/bsipos/paper-pasp}{https://github.com/bsipos/paper-pasp}. Individual primary data analysis steps implemented in specialised tools written in Python (under directory \texttt{patsy/})  and downstream data analysis steps implemented in R scripts (under \texttt{scripts/}) can be invoked through documented \texttt{make} targets.
+The data analysis pipeline with documentation, logs and selected raw results (see also \textbf{Supporting Text S1}) is available at \href{https://github.com/bsipos/paper-pasp}{https://github.com/bsipos/paper-pasp}. Individual primary data analysis steps implemented in specialised tools written in Python (under directory \texttt{patsy/})  and downstream data analysis steps implemented in R scripts (under \texttt{scripts/}) can be invoked through documented \texttt{make} targets.
 
 The first primary data analysis step is the classification of read pairs into ``G-tail'' pairs, based on the presence of a sequence motif characteristic to the poly(A) tail/oligo(G)-tag junction in the first 14 aligned bases of one of the reads, or ``NVTR'' read pairs otherwise. For G-tail reads we require a minimum G-tag length of 3 and we allow for a maximum of 6 Ns in the first 14 bases. The G-tail pairs represent those that will, ideally, contain the complete PAT in one read and mappable sequence in the paired read that will unambiguously identify the transcript. We map the G-tail read pairs to the SGD \textit{S.~cerevisiae} reference transcriptome \cite{engel13} using Bowtie2 \cite{langmead12} with parameters \texttt{--ignore-quals --sensitive -I~0 -X~500 --no-contain}, chosen to perform a stringent alignment of the read anchoring the fragment to the respective transcript. 
 
@@ -208,18 +209,18 @@ Downstream analysis steps (invoked through other analysis pipeline \texttt{make}
 
 \subsection*{Characteristics of aligned fragments}
 
-The number of NVTR fragments was consistently 2.6--7.4 times higher than the number of G-tail fragments in all technical replicates. Also, the majority of the reads overlapping the poly(A) tails were sequenced as second reads, indicating that there were issues with detecting clusters having the repetitive tails as first reads (see alignment reports listed in \textbf{Text~S1}).
+The number of NVTR fragments was consistently 2.6--7.4 times higher than the number of G-tail fragments in all technical replicates. Also, the majority of the reads overlapping the poly(A) tails were sequenced as second reads, indicating that there were issues with detecting clusters having the repetitive tails as first reads (see alignment reports listed in \textbf{Supporting Text~S1}).
 
-The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fragments (26--39\%).  NVTR fragments mapped to various locations within the transcripts (see the report files listed in \textbf{Text~S1}), and for that reason we did not further investigate whether these fragments reliably define individual polyadenylation sites.
+The NVTR fragments also had a higher mapping rate (49--66\%) than the G-tail fragments (26--39\%).  NVTR fragments mapped to various locations within the transcripts (see the report files listed in \textbf{Supporting Text~S1}), and for that reason we did not further investigate whether these fragments reliably define individual polyadenylation sites.
 
 \subsection*{Quantification of tail run ``slippage'' using spike-ins}
 
-The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from \textbf{Text~S1}). 
+The poor quality of reads overlapping the poly(A) tails and the ``drift'' of the sequenced tail length is a known issue \cite{wilkening13} which can be clearly observed in the reads mapping to the poly(A) tracts in our spike-ins (see the file linked from \textbf{Supporting Text~S1}). 
 However, the mean tail run length from these 53558 reads is close to the true length of the poly(A) tracts (44.56 $\pm$ 16.11 cf.~42; see \textbf{Figure~1}). This suggests that given enough coverage of G-tail reads there is sufficient signal for characterising the tail length, as with increasing sample size the mean of the tail run distribution (including slippage noise) gets closer to the true tail length. The variance of the slippage noise distribution, however, also implies that filtering out transcripts with low G-tail fragment coverage is an essential step in quality control of PASP data.
 
 \subsection*{Global shift in polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants}
 
-The distribution of tail run lengths tabulated from the whole WT and mutant transcriptomes (\textbf{Figure~2A}) showed high consistency between biological replicates (compare \textbf{Figure~2} with \textbf{Figure~S1}). Both distributions are unimodal with a fat tail to the right. The right tail of the distribution is truncated in the case of the mutant samples as the largest measurable tail run is limited by the read length; the much lesser degree of truncation for the WT samples suggests that the read length of 101bp is capturing the full length of virtually all their poly(A) tails.
+The distribution of tail run lengths tabulated from the whole WT and mutant transcriptomes (\textbf{Figure~2A}) showed high consistency between biological replicates (compare \textbf{Figure~2} with \textbf{Supporting Figure~S1}). Both distributions are unimodal with a fat tail to the right. The right tail of the distribution is truncated in the case of the mutant samples as the largest measurable tail run is limited by the read length; the much lesser degree of truncation for the WT samples suggests that the read length of 101bp is capturing the full length of virtually all their poly(A) tails.
 
 We consistently observe an upward shift in the tail length in the \textit{$\Delta$ccr4-1/pan2} mutants: in WT samples the global mean of tail run lengths is consistently around 46, which is approximately in line with values reported by other studies (median tail length of 33 reported by \cite{subtelny14}), while in the mutants the mean length is around 71. Moreover, the global shift in tail run length (+25) is consistent with the mean of per-transcript tail run shifts (compare \textbf{Figure~2B} with \textbf{Figure~2A}). These observations are in accord with expectations, given that the mutant is supposed to have longer tails ($>$55 according to \cite{beilharz07}) due to the lack of nuclear and cytoplasmic deadenylase activity. This suggests that PASP is suitable for the assessment of global polyadenylation status in yeast.
 
@@ -243,7 +244,7 @@ The consistency of the tail run distributions for transcripts such as those show
 
 \subsection*{Correlation between PASP and previous high-throughput assays}
 
-We have examined the correlation of WT mean per-transcript tail run lengths for the 465 transcripts with at least 1000 G-tail fragment coverage with results obtained from \textit{S.~cerevisiae} by the PASTA \cite{beilharz07} and PAL-seq \cite{subtelny14} protocols. There was no correlation between the PASP and PAL-seq results (WT1 vs.\ PAL-seq: $r$=0.07; WT2 vs.\ PAL-seq: $r$=0.03; \textbf{Figure~S2}), despite the high correlation ($r$=0.73) of PASP between biological replicates for the high coverage subset and the high correlation between PAL-seq biological replicates. The correlation between PAL-seq and PASTA results was also weak (r=0.14 for 3631 transcripts; \textbf{Figure~S3}), while correlation between PASP and PASTA was negative (\textbf{Figure~S4}).
+We have examined the correlation of WT mean per-transcript tail run lengths for the 465 transcripts with at least 1000 G-tail fragment coverage with results obtained from \textit{S.~cerevisiae} by the PASTA \cite{beilharz07} and PAL-seq \cite{subtelny14} protocols. There was no correlation between the PASP and PAL-seq results (WT1 vs.\ PAL-seq: $r$=0.07; WT2 vs.\ PAL-seq: $r$=0.03; \textbf{Supporting Figure~S2}), despite the high correlation ($r$=0.73) of PASP between biological replicates for the high coverage subset and the high correlation between PAL-seq biological replicates. The correlation between PAL-seq and PASTA results was also weak (r=0.14 for 3631 transcripts; \textbf{Supporting Figure~S3}), while correlation between PASP and PASTA was negative (\textbf{Supporting Figure~S4}).
 
 The observed poor correlation between the different assays suggests that the polyadenylation status of the transcriptome might be especially sensitive to growth conditions, or alternatively can be explained by strong and reproducible biases affecting one or more of the assays. 
 Additional experiments will be necessary to further compare these alternative methods.
@@ -272,7 +273,8 @@ Based on our results we believe that direct sequencing of poly(A) tails will be 
 
 We would like to thank Prof.\ Thomas Preiss and Stuart Archer for providing the \textit{$\Delta$ccr4-1/pan2} mutant yeast strain, Vicente Pelechano for providing the spike-in standards and helpful discussion in the planning stage and Benjamin Raeder for technical expertise.
 
-BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinary Postdoc (EIPOD) Fellowship under Marie Curie Actions (COFUND). AMS, GS, TM, JK and NG were supported by EMBL.  GS is a member of Wolfson College, University of Cambridge.
+BS was funded by a European Molecular Biology Laboratory (EMBL) Interdisciplinary Postdoc (\mbox{EIPOD}) Fellowship under Marie Curie Actions (COFUND). AMS, GS, TM, JK and NG were supported by EMBL.  GS is a member of Wolfson College, University of Cambridge.  BS and TM's contributions to the work were concluded prior to their employment at Oxford Nanopore Technologies.
+
 
 \bibliography{pasp} 
 \newpage
@@ -331,7 +333,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 \includegraphics[scale=0.9]{FigureS1.png}
 \end{center}
 
-\textbf{Figure S1. Shift in global polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants.} \textbf{A.}~Distribution of tail run lengths from all transcripts in the wild type (WT2, in blue) and the (MUT2, in red) mutant samples. The coloured vertical lines mark the means of the respective distributions.
+\textbf{Supporting Figure S1. Shift in global polyadenylation status in \textit{$\Delta$ccr4-1/pan2} mutants.} \textbf{A.}~Distribution of tail run lengths from all transcripts in the wild type (WT2, in blue) and the (MUT2, in red) mutant samples. The coloured vertical lines mark the means of the respective distributions.
 \textbf{B.}~The distribution of significant (Mann-Whitney U-test, $p < 0.05$) per-transcript mean tail run length differences (MUT2 - WT2).
 }
 \newpage
@@ -341,7 +343,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 \includegraphics[scale=0.9]{FigureS2.png}
 \end{center}
 
-\textbf{Figure S2. Correlation of per-transcript mean tail lengths estimated by PASP and PAL-seq in wild type yeast.} \textbf{A.}~Scatter plot and Pearson correlation of PASP mean tail lengths at a coverage threshold of 1000 in WT1 with corresponding results from PAL-seq \cite{subtelny14}. \textbf{B.}~Scatter plot and Pearson correlation of PASP mean tail lengths at a coverage threshold of 1000 in WT2 with PAL-seq.}
+\textbf{Supporting Figure S2. Correlation of per-transcript mean tail lengths estimated by PASP and PAL-seq in wild type yeast.} \textbf{A.}~Scatter plot and Pearson correlation of PASP mean tail lengths at a coverage threshold of 1000 in WT1 with corresponding results from PAL-seq \cite{subtelny14}. \textbf{B.}~Scatter plot and Pearson correlation of PASP mean tail lengths at a coverage threshold of 1000 in WT2 with PAL-seq.}
 \newpage
 
 \item[]{
@@ -349,7 +351,7 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 \includegraphics[scale=1.25]{FigureS3.png}
 \end{center}
 
-\textbf{Figure S3. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PAL-seq \cite{subtelny14} and weighted lengths obtained by the PASTA method \cite{beilharz07}. }
+\textbf{Supporting Figure S3. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PAL-seq \cite{subtelny14} and weighted lengths obtained by the PASTA method \cite{beilharz07}. }
 }
 \newpage
 
@@ -358,12 +360,12 @@ WT2 and MUT2 (right) samples.} \textbf{A.}~Small heat shock protein HSP26/YBR072
 \includegraphics[scale=0.45]{FigureS4.png}
 \end{center}
 
-\textbf{Figure S4. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PASP and weighted lengths obtained by the PASTA method. \textbf{A.}~WT1 vs.\ PASTA. \textbf{B.}~WT2 vs.\ PASTA.}
+\textbf{Supporting Figure S4. Scatter plot and correlation between wild type yeast mean tail lengths obtained by PASP and weighted lengths obtained by the PASTA method. \textbf{A.}~WT1 vs.\ PASTA. \textbf{B.}~WT2 vs.\ PASTA.}
 }
 \newpage
 
 \item[]{
-\section{\textbf{Text S1. Index of selected raw results.}}
+\section{\textbf{Supporting Text S1. Index of selected raw results.}}
 }
 
 \end{itemize}
